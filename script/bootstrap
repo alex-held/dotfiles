@@ -35,7 +35,7 @@ setup_gitconfig() {
 
 
 link_file() {
-  local src=$1 dest$2
+  local src=$1 dest=$2
 
   local overwrite= backup= skip=
   local action=
