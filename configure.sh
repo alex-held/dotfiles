@@ -50,7 +50,7 @@ brewUpgrade () {
 }
 
 brewBundle () {
-    brew bundle
+    brew bundle --file ~/.dotfiles/Brewfile
     success 'brew dependencies installed'
 }
 
