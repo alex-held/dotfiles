@@ -128,27 +128,6 @@ install_dotfiles () {
   done
 }
 
-
-add_cron () {
-  echo "''"
-  info 'Adding Cron'
-  echo "''"
-  local frequency="*/15 * * * *"
-  local command=$1
-  local job="$frequency $command"
-  cat <(fgrep -i -v "$command" <(crontab -l)) <(echo "$job") | crontab -
-}
-
-add_line () {
-  echo "''"
-  info 'Adding line cron'
-  echo "''"
-  local command=$1
-  local job="$command"
-  cat <(fgrep -i -v "$command" <(crontab -l)) <(echo "$job") | crontab -
-}
-
-
 setup_gitconfig
 install_dotfiles
 
