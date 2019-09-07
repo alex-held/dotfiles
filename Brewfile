@@ -21,6 +21,8 @@ brew 'wget'
 
 #cask 'firefox'
 cask 'iterm2-beta'
+#cask 'nordvpn'
+#cask 'mongodb'
 cask 'visual-studio-code'
 #cask 'dotnet-sdk-preview'
 #cask '1password-beta'
