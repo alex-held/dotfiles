@@ -214,7 +214,7 @@ alex_colors () {
 
 alex_itermConfig () {
   # iterm2 config
-  read -p "Do you currently use iTerm2 and would you like to set jldeen's custom colors? y/n " -n 1 -r
+  read -p "Do you currently use iTerm2 and would you like to set my profile settings? y/n " -n 1 -r
   echo ''
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
