@@ -8,10 +8,15 @@ DOTFILES_ROOT=$(pwd -P)
 
 set -e
 
-echo ''
+echo "''"
+info 'Starting to installing your Badass macOS terminal!!'
+echo "''"
 
 setup_gitconfig() {
 
+  echo "''"
+  echo "Setting up git"
+  echo "''"
   if ! [ -f git/gitconfig.local.symlink ]
   then
     info 'setup gitconfig'
@@ -112,9 +117,9 @@ link_file() {
 }
 
 install_dotfiles () {
-  echo ''
+  echo "''"
   info 'Installing dotfiles'
-  echo ''
+  echo "''"
 
   local overwrite_all=false backup_all=false skip_all=false
 
@@ -127,9 +132,9 @@ install_dotfiles () {
 
 
 add_cron () {
-  echo ''
+  echo "''"
   info 'Adding Cron'
-  echo ''
+  echo "''"
   local frequency="*/15 * * * *"
   local command=$1
   local job="$frequency $command"
@@ -137,9 +142,9 @@ add_cron () {
 }
 
 add_line () {
-  echo ''
+  echo "''"
   info 'Adding line cron'
-  echo ''
+  echo "''"
   local command=$1
   local job="$command"
   cat <(fgrep -i -v "$command" <(crontab -l)) <(echo "$job") | crontab -
@@ -153,7 +158,9 @@ install_dotfiles
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
 then
+  echo "''"
   info "installing dependencies"
+  echo "''"
   if source bin/dot | while read -r data; do info "$data"; done
   then
     success "dependencies installed"
@@ -167,9 +174,9 @@ fi
 
 
 backupBin () {
-  echo ''
+  echo "''"
   info 'Backing up existing files'
-  echo ''
+  echo "''"
   
   if [ -d $HOME/bin ]; then
     info "current $HOME/bin folder, checking for existing symlink"
@@ -186,6 +193,9 @@ backupBin () {
 
 
 alex_Symlinks () {
+  echo "''"
+  info "Creating symlinks"
+  echo "''"
   # symlink .dotfiles bin to ~
   ln -s $HOME/.dotfiles/bin $HOME/bin && success "symlink for $HOME/bin folder created"
 
@@ -215,6 +225,9 @@ alex_Symlinks () {
 
 
 alex_colors () {
+  echo "''"
+  echo "Colorizing shell output."
+  echo "''"
   # colorls setup
   sudo gem install colorls && success 'ls colors have been configured'
 }
@@ -241,6 +254,9 @@ alex_itermConfig () {
 }
 
 alex_configFix () {
+  echo "''"
+  echo "Fixing .config permissions"
+  echo "''"
   # .config permissions fix
   if ! [ -d "$HOME/.config" ]; then
     info "$HOME/.config doesn't exist, nothing to fix"
