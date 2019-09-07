@@ -205,7 +205,7 @@ alex_Symlinks () {
 
 alex_colors () {
   echo "''"
-  echo "Colorizing shell output."
+  echo "Bringing color into your tty."
   echo "''"
   # colorls setup
   sudo gem install colorls && success 'ls colors have been configured'
@@ -223,12 +223,12 @@ alex_itermConfig () {
     defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
       if [[ $? -eq 0 ]]
       then
-          success "successfully configured iTerm2 to use jldeen's custom colors..."
+          success "successfully configured iTerm2 to use my custom colors..."
       else
-          fail "failed to apply jldeen's custom colors..." >&2
+          fail "failed to apply my profile..." >&2
   fi
   else 
-      info "You chose not to use iTerm2 or jldeen's custom colors."
+      info "You chose not to use iTerm2 or using my profile."
   fi
 }
 
