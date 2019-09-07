@@ -44,6 +44,16 @@ brewUpdate () {
     success 'brew updated'
 }
 
+brewUpgrade () {
+    brew upgrade
+    success 'brew upgraded'
+}
+
+brewBundler () {
+    brew bundle
+    success 'brew dependencies installed'
+}
+
 zshInstall () {
     # zsh install
     # todo add in check for macOS 10.15 since zsh is default
