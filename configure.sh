@@ -93,7 +93,8 @@ ohmyzshInstall () {
     else
     echo "oh-my-zsh not found, now installing oh-my-zsh..."
     echo ''
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
+    # sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     success 'oh-my-zsh installed'
     fi
 }
