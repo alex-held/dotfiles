@@ -213,8 +213,8 @@ wombatColorSchemeInstall () {
 # brew setup
 brewInstall
 brewUpdate
-brewUpgrade
-brewBundle
+#brewUpgrade
+#brewBundle
 
 # zsh setup
 zshInstall
