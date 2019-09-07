@@ -114,7 +114,8 @@ ohmyzshPluginInstall () {
     if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]; then
         info 'zsh-syntax-highlighting already installed'
     else
-        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting && 'zsh-syntax-highlighting installed'
+    	echo "Skipping Zsh-Syntax-Hightlighting"
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting && success 'zsh-syntax-highlighting installed'
     fi
 }
 
