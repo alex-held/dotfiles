@@ -1,4 +1,3 @@
-#!/bin/sh
 #
 # dot
 #
@@ -41,16 +40,11 @@ done
 export ZSH=$HOME/.dotfiles
 
 # Set macOS defaults
-#sudo $ZSH/macos/set-defaults.sh
+sh $ZSH/macos/set-defaults.sh
 
 # Install homebrew
-sudo $ZSH/homebrew/install.sh 2>&1
-
-# Upgrade homebrew
-#echo "› brew update"
-#brew update
+sh $ZSH/homebrew/install.sh 2>&1
 
 # Install software
-read -p "now bundling brew y/n" -n -r
 echo "› $ZSH/script/install"
-sudo $ZSH/script/install
+sh $ZSH/script/install
