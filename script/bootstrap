@@ -44,8 +44,6 @@ link_file() {
 
   local overwrite= backup= skip=
   local action=
-  local overwrite= backup= skip=
-  local action=
 
   if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]
   then
@@ -160,7 +158,10 @@ if [ "$(uname -s)" == "Darwin" ]
 then
   echo "''"
   info "installing dependencies"
+  info "Dotfiles root: $DOTFILES_ROOT"
+  info "pwd: $(pwd -P)"
   echo "''"
+
   if source bin/dot | while read -r data; do info "$data"; done
   then
     success "dependencies installed"
