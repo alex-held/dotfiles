@@ -3,7 +3,7 @@ cask_args appdir: '/Applications'
 tap 'homebrew/bundle'
 
 brew 'ack'
-brew 'core-utils'
+brew 'coreutils'
 brew 'bash-completions'
 brew 'git'
 brew 'jq'
