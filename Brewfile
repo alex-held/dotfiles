@@ -1,24 +1,25 @@
-cask-args appdir: '/Applications'
+cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
 
-brew upgrade && brew update
-
+brew 'ack'
 brew 'core-utils'
 brew 'bash-completions'
 brew 'git'
+brew 'jq'
 brew 'openssl'
 brew 'node'
 brew 'ruby-build'
-brew 'python'
 brew 'rbenv'
+brew 'python'
+brew 'python3'
 brew 'unrar'
 brew 'watch'
 brew 'wget'
 brew 'yarn'
 
-cask 'firefox'
+#cask 'firefox'
 cask 'iterm2-nightly'
-cask 'visual-studio-code'
-cask 'alfred'
-cask 'microsoft-teams'
+#cask 'visual-studio-code'
+#cask 'alfred'
+#cask 'microsoft-teams'
