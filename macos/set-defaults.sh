@@ -1,3 +1,4 @@
+#!/bin/sh
 # Sets reasonable macOS defaults.
 #
 # Or, in other words, set shit how I like in macOS.
