@@ -49,7 +49,7 @@ brewUpgrade () {
     success 'brew upgraded'
 }
 
-brewBundler () {
+brewBundle () {
     brew bundle
     success 'brew dependencies installed'
 }
@@ -213,6 +213,8 @@ wombatColorSchemeInstall () {
 # brew setup
 brewInstall
 brewUpdate
+brewUpgrade
+brewBundle
 
 # zsh setup
 zshInstall
