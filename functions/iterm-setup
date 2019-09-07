@@ -9,7 +9,6 @@ iterm_setup() {
 
     ln -s "~/.dotfiles/iterm/itermcfg.syslink" "~/.itermcfg"
 
-    link_file ~/.dotfiles/iterm/itermcfg.syslink
     # Specify the preferences directory
     defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.itermcfg/"
     
@@ -23,4 +22,3 @@ iterm_setup() {
       fi
 }
 
-iterm_setup
