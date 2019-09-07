@@ -137,16 +137,15 @@ if [ "$(uname -s)" == "Darwin" ]
 then
   echo "''"
   info "installing dependencies"
-  info "Dotfiles root: $DOTFILES_ROOT"
-  info "pwd: $(pwd -P)"
   echo "''"
 
   if source bin/dot | while read -r data; do info "$data"; done
   then
+    echo "''"
     success "dependencies installed"
-    echo ''
-    echo "Now updating dependencies..."
-    pip3 install --upgrade setuptools --user python
+    echo "''"
+    #echo "Now updating dependencies..."
+    #pip3 install --upgrade setuptools --user python
   else
     fail "error installing dependencies"
   fi
