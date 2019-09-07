@@ -112,7 +112,9 @@ link_file() {
 }
 
 install_dotfiles () {
-  info 'installing dotfiles'
+  echo ''
+  info 'Installing dotfiles'
+  echo ''
 
   local overwrite_all=false backup_all=false skip_all=false
 
@@ -125,6 +127,9 @@ install_dotfiles () {
 
 
 add_cron () {
+  echo ''
+  info 'Adding Cron'
+  echo ''
   local frequency="*/15 * * * *"
   local command=$1
   local job="$frequency $command"
@@ -132,6 +137,9 @@ add_cron () {
 }
 
 add_line () {
+  echo ''
+  info 'Adding line cron'
+  echo ''
   local command=$1
   local job="$command"
   cat <(fgrep -i -v "$command" <(crontab -l)) <(echo "$job") | crontab -
@@ -156,9 +164,13 @@ then
     fail "error installing dependencies"
   fi
 fi
+
+
 backupBin () {
-  info "starting jldeen mods"
-  #backup old bin, if exists
+  echo ''
+  info 'Backing up existing files'
+  echo ''
+  
   if [ -d $HOME/bin ]; then
     info "current $HOME/bin folder, checking for existing symlink"
     if [ ! -L $HOME/bin ]; then
