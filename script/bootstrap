@@ -236,4 +236,12 @@ alex_itermConfig
 alex_fontSetup
 alex_configFix
 
+# Set zsh as default shell
+read -p "Do you want me to setup the zsh shell as your default shell? y/n " -n 1 -r
+echo ''
+if [[ $REPLY =~ ^[Yy]$ ]] 
+  then
+    chsh -s /bin/zsh
+fi
+
 success 'Badass macOS terminal installed!'
