@@ -167,7 +167,7 @@ then
     success "dependencies installed"
     echo ''
     echo "Now updating dependencies..."
-    pip3 install --upgrade setuptools
+    pip3 install --upgrade setuptools --user python
   else
     fail "error installing dependencies"
   fi
