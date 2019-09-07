@@ -11,8 +11,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 # zsh tmux settings
-ZSH_TMUX_AUTOSTART='true'
-ZSH_TMUX_AUTOCONNECT='false' # do not autoconnect to existing tmux session, allows a new term new tmux session
+#ZSH_TMUX_AUTOSTART='true'
+#ZSH_TMUX_AUTOCONNECT='false' # do not autoconnect to existing tmux session, allows a new term new tmux session
 
 # #Background Jobs Function
 # set_default POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE true
@@ -158,7 +158,7 @@ ZSH_HIGHLIGHT_STYLES[path_approx]=fg=cyan
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red') # To have commands starting with `rm -rf` in red:
 
 #---- Export ----
-export PATH=$PATH:/Users/jessicadeen/bin
+export PATH=$PATH:/Users/dev/bin
 export PATH=$GOPATH/bin:$PATH
 export PATH=$PATH:/usr/local/bin/node
 export PATH="/usr/local/opt/node@8/bin:$PATH"
@@ -168,8 +168,8 @@ export PATH=$PATH:$MONGO_PATH/bin
 #---- End Export ----
 
 #---- Source ----
-[ -f ~/bin/fubectl.source ] && source ~/bin/fubectl.source
-source <(kubectl completion zsh)
+#[ -f ~/bin/fubectl.source ] && source ~/bin/fubectl.source
+#source <(kubectl completion zsh)
 source $(dirname $(gem which colorls))/tab_complete.sh
 #---- End Source ----
 #---- END CUSTOM ----
