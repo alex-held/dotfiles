@@ -1,7 +1,25 @@
 #!/bin/bash
 set -eou pipefail
 
-source ./script/prompt
+# script/prompt
+info () {
+  printf "\r  [ \033[00;34m..\033[0m ] $1\n"
+}
+
+user () {
+  printf "\r  [ \033[0;33m??\033[0m ] $1\n"
+}
+
+success () {
+  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
+}
+
+fail () {
+  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
+  echo ''
+  exit
+}
+#source ./script/prompt
 
 brewInstall () {
     # Install brew
@@ -26,14 +44,24 @@ brewUpdate () {
     success 'brew updated'
 }
 
+brewUpgrade () {
+    brew upgrade
+    success 'brew upgraded'
+}
+
+brewBundle () {
+    brew bundle --file=~/.dotfiles/Brewfile
+    success 'brew dependencies installed'
+}
+
 zshInstall () {
     # zsh install
     # todo add in check for macOS 10.15 since zsh is default
     if test $(which zsh); then
         info "zsh already installed..."
     else
-        brew install zsh zsh-completions
-        success 'zsh and zsh-completions installed'
+        brew install zsh 
+        success 'zsh installed'
     fi
 }
 
@@ -75,7 +103,8 @@ ohmyzshInstall () {
     else
     echo "oh-my-zsh not found, now installing oh-my-zsh..."
     echo ''
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
+    # sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     success 'oh-my-zsh installed'
     fi
 }
@@ -95,7 +124,8 @@ ohmyzshPluginInstall () {
     if [ -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]; then
         info 'zsh-syntax-highlighting already installed'
     else
-        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting && 'zsh-syntax-highlighting installed'
+    	echo "Skipping Zsh-Syntax-Hightlighting"
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting && success 'zsh-syntax-highlighting installed'
     fi
 }
 
@@ -115,7 +145,7 @@ pl10kInstall () {
         info 'powerlevel10k already installed'
     else
         echo "Now installing powerlevel10k..."
-        git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k && success 'powerlevel10k installed'
+	git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k && success 'powerlevel10k installed'
     fi
 }
 
@@ -183,14 +213,16 @@ wombatColorSchemeInstall () {
 # brew setup
 brewInstall
 brewUpdate
+#brewUpgrade
+#brewBundle
 
 # zsh setup
 zshInstall
-zshZInstall
 configureGitCompletion
 
 # oh my zsh setup
 ohmyzshInstall
+zshZInstall
 ohmyzshPluginInstall
 pl9kInstall
 pl10kInstall
