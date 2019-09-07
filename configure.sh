@@ -50,8 +50,8 @@ zshInstall () {
     if test $(which zsh); then
         info "zsh already installed..."
     else
-        brew install zsh zsh-completions
-        success 'zsh and zsh-completions installed'
+        brew install zsh 
+        success 'zsh installed'
     fi
 }
 
@@ -204,11 +204,11 @@ brewUpdate
 
 # zsh setup
 zshInstall
-zshZInstall
 configureGitCompletion
 
 # oh my zsh setup
 ohmyzshInstall
+zshZInstall
 ohmyzshPluginInstall
 pl9kInstall
 pl10kInstall
