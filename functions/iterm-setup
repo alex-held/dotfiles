@@ -1,13 +1,13 @@
 #!/bin/sh
 #
-# Usage: iterm_setup
+# Usage: iterm-setup
 # Description: copies settings from repo into iterm2
 #
 
 
 iterm_setup() {
 
-    ln -s "~/.dotfiles/iterm/itermcfg.syslink" "~/.itermcfg"
+    sudo ln -s "~/.itermcfg" "~/.dotfiles/iterm/itermcfg.syslink"
 
     # Specify the preferences directory
     defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.itermcfg/"
