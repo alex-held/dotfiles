@@ -280,8 +280,9 @@ fi
 
 while read -p "In which directory, you want your dotsettings repository?" -n 1 -r
 do
-	if ! [ -f $($HOME/$REPLY) ] || [ -d $($HOME/$REPLY) ]; 
+	if ! [ -f "$HOME/$REPLY" ] || [ -d "$HOME/$REPLY" ]; 
 	then
+	    DOTFILES="$HOME/$REPLY"
 	    echo cloneAndExecute $DOTFILES 
 	    exit 0;
 	else
