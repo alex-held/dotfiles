@@ -278,7 +278,7 @@ fi
 
     
 
-while read -p "In which directory, you want your dotsettings repository?" -n -r
+while read -p "In which directory, you want your dotsettings repository?" -r
 do
 	if ! [ -f "$HOME/$REPLY" ] || [ -d "$HOME/$REPLY" ]; 
 	then
