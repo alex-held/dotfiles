@@ -209,16 +209,16 @@ alex_Symlinks () {
 
 
 alex_colors () {
-  sudo gem install colorls &&  "Settin up a color schema for your tty."
+  sudo gem install colorls &&  success "Settin up a color schema for your tty."
 }
 
 
 alex_configFix () {
 
-    echo "Fixing .config permissions"
+   echo "Fixing .config permissions"
 
   if ! [ -d "$HOME/.config" ]; then
-    "$HOME/.config doesn't exist" | fail > dev/null
+    "$HOME/.config doesn't exist" | echo > dev/null
   else
     sudo chown $(whoami) $HOME/.config 
     success '.config permissions fixed'
@@ -280,7 +280,7 @@ alex_itermConfig () {
             "random")
                 export ZSH_THEME="random";
                 ;;
-            *) fail "invalid option $REPLY";;
+            *) user "invalid option $REPLY";;
         esac
     done
     success 'Perfect choice !'
@@ -305,7 +305,7 @@ backupBin
 alex_Symlinks
 alex_colors
 alex_fontSetup
-iterm_setup
+#iterm_setup
 alex_itermConfig
 alex_configFix
 
