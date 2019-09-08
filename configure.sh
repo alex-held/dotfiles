@@ -274,7 +274,7 @@ if [[ $REPLY =~ ^[Nn]$ ]];
     then setting_Defaults "And we are done." ;
 else
 
-while read "In which directory, you want your dotsettings repository? <path> : must be one hierachy under your home folder " dir
+until read "In which directory, you want your dotsettings repository? <path> : must be one hierachy under your home folder " dir
 do
     if ! [ -f $($HOME/$dir) ] && ! [ -d $($HOME/$dir) ] ; 
         then 
