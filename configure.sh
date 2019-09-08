@@ -44,16 +44,6 @@ brewUpdate () {
     success 'brew updated'
 }
 
-brewUpgrade () {
-    brew upgrade
-    success 'brew upgraded'
-}
-
-brewBundle () {
-    brew bundle --file=~/.dotfiles/Brewfile
-    success 'brew dependencies installed'
-}
-
 zshInstall () {
     # zsh install
     # todo add in check for macOS 10.15 since zsh is default
@@ -210,6 +200,41 @@ wombatColorSchemeInstall () {
     fi
 }
 
+cloneAndExecute(){
+
+echo '"'
+echo "Cloning the tempate repository into $1"
+echo '"'
+
+{
+    git clone --quiet https://github.com/alex-held/dotfiles.git $1
+} > /dev/null
+
+if [ -n $1 ];
+    then
+        echo "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $DOTFILES ." | settzing_Defaults
+    elif [ -f $1 ] || [ -d $1 ];
+    then 
+        echo "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $DOTFILES ." | settzing_Defaults
+    else
+        export DOTFILES=$1
+    elif [ -z $($DOTFILES/script/bootstrap) ] && exit 0 || echo "Sorry! The dotfiles could not applied successfully ..." | setting_Defaults 
+fi
+
+}
+
+setting_Defaults() {
+	echo '"'
+    echo "$1 "
+	echo "Setting defaults for .zshrc and .bashrc. You may need to configure your environment manually... "
+	echo "source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc  2&> dev/null
+	echo "source $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc 2&> dev/null
+	echo '"'
+    exit 0;
+   # echo "[ -f ~/bin/fubectl.source ] && source ~/bin/fubectl.source" >> ${ZDOTDIR:-$HOME}/.zshrc && echo "added fubectl to .zshrc..."
+}
+
+
 # brew setup
 brewInstall
 brewUpdate
@@ -235,39 +260,25 @@ pathogenInstall
 nerdtreeInstall
 wombatColorSchemeInstall
 
-# Pull down personal dotfiles
-echo ''
-read -p "Do you also want to use exactly my dotfile configartions? y/n" -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-    echo ''
-	echo "Now pulling down alex-held's dotfiles..."
-	git clone https://github.com/alex-held/dotfiles.git ~/.dotfiles
-	echo ''
-	cd $HOME/.dotfiles && echo "switched to .dotfiles dir..."
-	echo ''
-	echo "Checking out macOS dev branch..." && git checkout master
-	echo ''
-	echo "Now configuring symlinks..." && $HOME/.dotfiles/script/bootstrap
-    echo ''
 
-    if [[ $? -eq 0 ]]
-    then
-        echo "Successfully configured your environment with alex-held's macOS dotfiles..."
-    else
-        echo "alex-held's macOS dotfiles were not applied successfully..." >&2
-fi
-else 
-	echo ''
-    echo "You chose not to apply alex-held's macOS dotfiles. You will need to configure your environment manually..."
-	echo ''
-	echo "Setting defaults for .zshrc and .bashrc..."
-	echo ''
-	echo "source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc && echo "added zsh-syntax-highlighting to .zshrc..."
-	echo ''
-	echo "source $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc && echo "added zsh-autosuggestions to .zshrc..."
-	echo ''
-   # echo "[ -f ~/bin/fubectl.source ] && source ~/bin/fubectl.source" >> ${ZDOTDIR:-$HOME}/.zshrc && echo "added fubectl to .zshrc..."
-	
-fi
+
+echo '"'
+read -p "Do you also want to use exactly my dotfile configartions? y/n" -n 1 -r
+echo '"'
+
+if [[ $REPLY =~ ^[Nn]$ ]]; 
+    then setting_Defaults "And we are done." ;
+else
+
+while 
+do
+    read "In which directory, you want your dotsettings repository? <path> : must be one hierachy under your home folder "  -r : dir
+    if ! [ -f $($HOME/$dir) ] && ! [ -d $($HOME/$dir) ] ; 
+        then 
+            echo cloneAndExecute $DOTFILES
+            exit 0;
+        else
+            echo "This directory is not available. Please try again. ";
+    fi
+done
+}
