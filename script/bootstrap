@@ -218,7 +218,7 @@ alex_configFix () {
     echo "Fixing .config permissions"
 
   if ! [ -d "$HOME/.config" ]; then
-    "$HOME/.config doesn't exist" > fail 2&> > dev/null
+    "$HOME/.config doesn't exist" | fail > dev/null
   else
     sudo chown $(whoami) $HOME/.config 
     success '.config permissions fixed'
