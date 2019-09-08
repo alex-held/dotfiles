@@ -276,14 +276,17 @@ else
 
 while read "In which directory, you want your dotsettings repository?" dir && ! [ -f $($HOME/$dir) ] || [ -d $($HOME/$dir) ]
 do
-    # if ! [ -f $($HOME/$dir) ] && ! [ -d $($HOME/$dir) ] ; 
-        then 
-            echo cloneAndExecute $DOTFILES 
+    	if ! [ -f $($HOME/$dir) ] || [ -d $($HOME/$dir) ] ; 
+	then
+	    echo cloneAndExecute $DOTFILES 
             exit 0;
         else
-            echo "This directory is not available. Please try again. ";
-	    continue;
-    fi
+    	echo "This directory is not available. Please try again. ";
+	continue;
+        
+        #else
+        #then    
+       fi
 done
 
 fi
