@@ -274,9 +274,9 @@ if [[ $REPLY =~ ^[Nn]$ ]];
     then setting_Defaults "And we are done." ;
 else
 
-until read "In which directory, you want your dotsettings repository? <path> : must be one hierachy under your home folder " dir
+while read "In which directory, you want your dotsettings repository?" dir && ! [ -f $($HOME/$dir) ] || [ -d $($HOME/$dir) ]
 do
-    if ! [ -f $($HOME/$dir) ] && ! [ -d $($HOME/$dir) ] ; 
+    # if ! [ -f $($HOME/$dir) ] && ! [ -d $($HOME/$dir) ] ; 
         then 
             echo cloneAndExecute $DOTFILES 
             exit 0;
