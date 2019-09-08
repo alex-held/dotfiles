@@ -283,7 +283,7 @@ do
 	if ! [ -f "$HOME/$REPLY" ] || [ -d "$HOME/$REPLY" ]; 
 	then
 	    DOTFILES="$HOME/$REPLY"
-	    echo cloneAndExecute $DOTFILES 
+	    echo $DOTFILES | cloneAndExecute
 	    exit 0;
 	else
 	echo "This directory is not available. Please try again. ";
