@@ -1,9 +1,8 @@
 #!/bin/sh
 #
 # bootstrap installs things.
-source ./script/prompt
-source ./functions/iterm-setup
 
+source ./script/prompt
 
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd -P)
@@ -43,8 +42,8 @@ setup_gitconfig() {
 
 
 link_file() {
-  local src=$1 dest=$2
 
+  local src=$1 dest=$2
   local overwrite= backup= skip=
   local action=
 
@@ -118,6 +117,7 @@ link_file() {
 }
 
 install_dotfiles () {
+
   echo "''"
   info 'Installing dotfiles'
   echo "''"
@@ -135,7 +135,6 @@ setup_gitconfig
 install_dotfiles
 
 
-
 install_Dependencies() 
 {
     echo '"'
@@ -145,8 +144,6 @@ install_Dependencies()
   # If we're on a Mac, let's install and setup homebrew.
   if [ "$(uname -s)" == "Darwin" ]
   then
-
-   
 
     if source bin/dot | while read -r data; do info "$data"; done
     then
@@ -255,6 +252,7 @@ backupBin
 alex_Symlinks
 alex_colors
 alex_fontSetup
+iterm_setup
 alex_itermConfig
 alex_configFix
 
@@ -267,6 +265,21 @@ if [[ $REPLY =~ ^[Yy]$ ]]
   then
     chsh -s /bin/zsh
 fi
+
+
+iterm_setup() {
+   
+    defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.itermcfg/"
+    defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
+    
+      if [[ $? -eq 0 ]]
+      then
+          success "successfully configured iTerm2 to use my settings!"
+      else
+          echo "failed to apply my settings." >&2 >> dev/null;
+      fi
+}
+
 
 
 alex_itermConfig () {

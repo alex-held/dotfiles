@@ -206,23 +206,16 @@ echo '"'
 echo "Cloning the tempate repository into $1"
 echo '"'
 
-#{
-    #git clone --quiet https://github.com/alex-held/dotfiles.git $1
-#} > /dev/null
-
-#if  [ -n $1 +a -f $1 ];
-folder=$(git clone --quiet https://github.com/alex-held/dotfiles.git $1)
-if [ -z folder ]
+folder=$
+if ! (git clone --quiet https://github.com/alex-held/dotfiles.git $1) 
     then
-        echo "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $DOTFILES ." | settzing_Defaults
+        echo "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $DOTFILES ." >> settzing_Defaults 2&> exit 1;
     elif [ -d $1 ];
     then
         export DOTFILES=$1;
-    elif [ -z $($DOTFILES/script/bootstrap) ];
-    	then 
-	    exit 0;
+    elif ! "$DOTFILES/script/bootstrap" && cd $DOTFILES;
     else 
-         echo "Sorry! The dotfiles could not applied successfully ..." | setting_Defaults ;
+        info "Sorry! The dotfiles could not applied successfully ..." >> settzing_Defaults 2&> exit 1;
 fi
 
 }
@@ -271,23 +264,24 @@ read -p "Do you also want to use exactly my dotfile configartions? y/n" -n 1 -r
 echo '"'
 
 if [[ $REPLY =~ ^[Nn]$ ]]; 
-    then setting_Defaults "And we are done." ;
+    then setting_Defaults "And we are done."  && exit 0;
     else
-    	:
-fi
+    
+
 
     
 
-while read -p "In which directory, you want your dotsettings repository?" -r
-do
-	if ! [ -f "$HOME/$REPLY" ] || [ -d "$HOME/$REPLY" ]; 
-	then
-	    export DOTFILES="$HOME/$REPLY"
-	    cloneAndExecute "$DOTFILES"
-	    exit 0;
-	else
-	echo "This directory is not available. Please try again. ";
-	continue;  
-       fi
-done
+    while read -p "In which directory, you want your dotsettings repository?" -r
+    do
+        if ! [ -f "$HOME/$REPLY" ] || [ -d "$HOME/$REPLY" ]; 
+        then
+            export DOTFILES="$HOME/$REPLY" && cloneAndExecute "$DOTFILES"
+           
+            exit 0;
+        else
+        echo "This directory is not available. Please try again. ";
+        continue;  
+        fi
+    done
 
+fi
