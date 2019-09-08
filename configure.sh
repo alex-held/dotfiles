@@ -272,21 +272,21 @@ echo '"'
 
 if [[ $REPLY =~ ^[Nn]$ ]]; 
     then setting_Defaults "And we are done." ;
-else
+    else
+    	:
+fi
 
-while read "In which directory, you want your dotsettings repository?" dir && ! [ -f $($HOME/$dir) ] || [ -d $($HOME/$dir) ]
+    
+
+while read -p "In which directory, you want your dotsettings repository?" -n 1 -r
 do
-    	if ! [ -f $($HOME/$dir) ] || [ -d $($HOME/$dir) ] ; 
+	if ! [ -f $($HOME/$REPLY) ] || [ -d $($HOME/$REPLY) ]; 
 	then
 	    echo cloneAndExecute $DOTFILES 
-            exit 0;
-        else
-    	echo "This directory is not available. Please try again. ";
-	continue;
-        
-        #else
-        #then    
+	    exit 0;
+	else
+	echo "This directory is not available. Please try again. ";
+	continue;  
        fi
 done
 
-fi
