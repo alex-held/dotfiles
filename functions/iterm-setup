@@ -6,12 +6,12 @@
 
 
 iterm_setup() {
-
-    sudo ln -s "~/.itermcfg" "~/.dotfiles/iterm/itermcfg.syslink"
+    # symlink .dotfiles/iterm .itermcnf to ~
+    #ln -s $HOME/.dotfiles/iterm/.itermcnf $HOME/.itermcnf && success "symlink for $HOME/.itermcnf folder created"
 
     # Specify the preferences directory
     defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.itermcfg/"
-    
+
     # Tell iTerm2 to use the custom preferences in the directory
     defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
       if [[ $? -eq 0 ]]
