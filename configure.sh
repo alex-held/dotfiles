@@ -210,15 +210,17 @@ echo '"'
     git clone --quiet https://github.com/alex-held/dotfiles.git $1
 } > /dev/null
 
-if [ -n $1 ];
+if  [ -n $1 +a -f $1 ];
     then
         echo "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $DOTFILES ." | settzing_Defaults
-    elif [ -f $1 ] || [ -d $1 ];
-    then 
-        echo "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $DOTFILES ." | settzing_Defaults
-    else
-        export DOTFILES=$1
-    elif [ -z $($DOTFILES/script/bootstrap) ] && exit 0 || echo "Sorry! The dotfiles could not applied successfully ..." | setting_Defaults 
+    elif [ -d $1 ];
+    then
+        export DOTFILES=$1;
+    elif [ -z $($DOTFILES/script/bootstrap) ];
+    	then 
+	    exit 0;
+    else 
+         echo "Sorry! The dotfiles could not applied successfully ..." | setting_Defaults ;
 fi
 
 }
