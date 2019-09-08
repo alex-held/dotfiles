@@ -2,6 +2,7 @@
 #
 # bootstrap installs things.
 source ./script/prompt
+source ./functions/iterm-setup
 
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd -P)
@@ -217,26 +218,16 @@ alex_itermConfig () {
   echo ''
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
-    # Specify the preferences directory
-    defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.itermcfg/"
-    # Tell iTerm2 to use the custom preferences in the directory
-    defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
-      if [[ $? -eq 0 ]]
-      then
-          success "successfully configured iTerm2 to use my custom colors..."
-      else
-          fail "failed to apply my profile..." >&2
-  fi
-  else 
-      info "You chose not to use iTerm2 or using my profile."
+    iterm-setup
   fi
 }
 
 alex_configFix () {
-  echo "''"
-  echo "Fixing .config permissions"
-  echo "''"
-  # .config permissions fix
+
+  echo '"'
+  echo 'Fixing .config permissions'
+  echo '"'
+  
   if ! [ -d "$HOME/.config" ]; then
     info "$HOME/.config doesn't exist, nothing to fix"
   else
