@@ -280,6 +280,9 @@ do
             exit 0;
         else
             echo "This directory is not available. Please try again. ";
+	    continue;
     fi
 done
+
+fi
 }
