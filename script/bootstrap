@@ -236,7 +236,8 @@ alex_fontSetup () {
 alex_itermConfig () {
 
   if ! [ -f /Applications/iTerm2 ]; 
-      then
+      then 
+      return 0;
     else 
 
       success 'I see you are already using iTerm2.'
@@ -259,10 +260,10 @@ alex_itermConfig () {
     echo 'Please choose a theme: ' 
     options=("spaceship" "powerline10k" "powerlevel9k" "random")
     
-    for theme in "${options[@]}"
-    do
-      echo theme > dev/null
-    done
+    #for theme in "${options[@]}"
+    #do
+     # echo theme > dev/null
+    #done
     
     select opt in "${options[@]}"
     do
