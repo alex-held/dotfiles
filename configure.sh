@@ -206,11 +206,13 @@ echo '"'
 echo "Cloning the tempate repository into $1"
 echo '"'
 
-{
-    git clone --quiet https://github.com/alex-held/dotfiles.git $1
-} > /dev/null
+#{
+    #git clone --quiet https://github.com/alex-held/dotfiles.git $1
+#} > /dev/null
 
-if  [ -n $1 +a -f $1 ];
+#if  [ -n $1 +a -f $1 ];
+folder=$(git clone --quiet https://github.com/alex-held/dotfiles.git $1)
+if [ -z folder ]
     then
         echo "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $DOTFILES ." | settzing_Defaults
     elif [ -d $1 ];
