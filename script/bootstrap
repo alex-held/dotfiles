@@ -19,6 +19,7 @@ setup_gitconfig() {
   echo "''"
   echo "Setting up git"
   echo "''"
+  
   if ! [ -f git/gitconfig.local.symlink ]
   then
     info 'setup gitconfig'
@@ -134,56 +135,68 @@ setup_gitconfig
 install_dotfiles
 
 
-# If we're on a Mac, let's install and setup homebrew.
-if [ "$(uname -s)" == "Darwin" ]
-then
-  echo "''"
-  info "installing dependencies"
-  echo "''"
 
-  if source bin/dot | while read -r data; do info "$data"; done
+install_Dependencies() 
+{
+    echo '"'
+    info "Starting to brew 🍺 your dependecies."
+    echo '"'
+
+  # If we're on a Mac, let's install and setup homebrew.
+  if [ "$(uname -s)" == "Darwin" ]
   then
-    echo "''"
-    success "dependencies installed"
-    echo "''"
-    #echo "Now updating dependencies..."
-    #pip3 install --upgrade setuptools --user python
-  else
-    fail "error installing dependencies"
-  fi
-fi
 
+   
 
-backupBin () {
-  echo "''"
-  info 'Backing up existing files'
-  echo "''"
-  
-  if [ -d $HOME/bin ]; then
-    info "current $HOME/bin folder, checking for existing symlink"
-    if [ ! -L $HOME/bin ]; then
-      info "current $HOME/bin is not a symlink, creating backup"
-      sudo mv $HOME/bin bin_old
-      success "backup folder created"
-    else info "$HOME/bin symlink already exists"
+    if source bin/dot | while read -r data; do info "$data"; done
+    then
+      echo "''"
+      success "dependencies installed"
+      echo "''"
+      #echo "Now updating dependencies..."
+      #pip3 install --upgrade setuptools --user python
+    else
+      fail "error installing dependencies"
     fi
-  else
-      info "No current $HOME/bin folder found, starting symlink creation"
   fi
 }
 
 
-alex_Symlinks () {
-  echo "''"
-  info "Creating symlinks"
-  echo "''"
-  # symlink .dotfiles bin to ~
-  ln -s $HOME/.dotfiles/bin $HOME/bin && success "symlink for $HOME/bin folder created"
 
-  # symlink .dotfiles tmux to ~
+backupBin () {
+
+  echo '"' 
+  echo "Lets back up your existing config files first."
+  echo '"' 
+  
+  if [ -d $HOME/bin ]; 
+    then # info "current $HOME/bin folder, checking for existing symlink"
+
+    if [ ! -L $HOME/bin ]; 
+      then  # $HOME/bin not a symlink
+      
+      echo '"'
+      info "$HOME/bin is not a symlink, I create backup ."
+      sudo mv $HOME/bin bin_old && success "You can find your data here: $HOME/bin_old"
+      echo '"'
+
+      else
+    fi
+  else
+fi
+}
+
+
+alex_Symlinks () {
+
+  echo '"' 
+  echo "Creating symlinks between the scc files, and the expected ones."
+  echo '"' 
+  
+  ln -s $HOME/.dotfiles/bin $HOME/bin && success "symlinked: $HOME/bin ~> $HOME/.dotfiles/bin !"
+
   #ln -s $HOME/.dotfiles/tmux $HOME/.tmux && success "symlink for $HOME/.tmux folder created"
 
-  # symlink VSCode User Settings
   #if [ -d $HOME/Library/Application\ Support/Code/User ] ; then
   #  echo "Making backup of current settings.json and creating symlink..."
   #  echo ''
@@ -194,7 +207,6 @@ alex_Symlinks () {
   #  echo "VS Code does not appear to be installed or has not been launched yet. Cannot create symlink for VS Code User settings..."
   #fi
 
-  # airport symlink
   #if ! [ -f /usr/local/bin/airport ]
   #  then
   #    sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
@@ -206,21 +218,23 @@ alex_Symlinks () {
 
 
 alex_colors () {
-  echo "''"
-  echo "Bringing color into your tty."
-  echo "''"
-  # colorls setup
-  sudo gem install colorls && success 'ls colors have been configured'
+
+  echo '"' 
+  echo "Settin up a color schema for your tty."
+  echo '"' 
+
+  sudo gem install colorls
 }
 
 
 alex_configFix () {
-  echo "''"
-  echo "Fixing .config permissions"
-  echo "''"
-  # .config permissions fix
+
+    echo '"' 
+    echo "Fixing .config permissions"
+    echo '"' 
+
   if ! [ -d "$HOME/.config" ]; then
-    info "$HOME/.config doesn't exist, nothing to fix"
+    "$HOME/.config doesn't exist" &2> dev/null
   else
     sudo chown $(whoami) $HOME/.config 
     success '.config permissions fixed'
@@ -228,9 +242,13 @@ alex_configFix () {
 }
 
 alex_fontSetup () {
-  # install Source Code Pro nerd font
+
+  echo '"' 
+  info 'I provide you a high quality font. ' 
+  echo '"' 
+
   cp $HOME/.dotfiles/Source\ Code\ Pro\ Nerd\ Font\ Complete.ttf /Library/Fonts
-  success "Source Code Pro font copied successfully!"
+  success "You go the: SourceCodeProNerdFont font !"
 }
 
 backupBin
@@ -240,9 +258,11 @@ alex_fontSetup
 alex_itermConfig
 alex_configFix
 
-# Set zsh as default shell
+
+echo '"' 
 read -p "Should I set zsh to your default shell? y/n " -n 1 -r
-echo ''
+echo '"' 
+
 if [[ $REPLY =~ ^[Yy]$ ]] 
   then
     chsh -s /bin/zsh
@@ -258,6 +278,7 @@ alex_itermConfig () {
       echo '"'
       read -p "I see you are already using iTerm2. Do you like to try my profile settings? y/n " -n 1 -r
       echo '"'
+
       if [[ $REPLY =~ ^[Yy]$ ]]
       then
 
@@ -304,10 +325,14 @@ alex_itermConfig () {
 
 if ! [ -f /Applications/iTerm2 ]; 
   then
-    success 'Badass macOS terminal installed!'
+      echo '"' 
+      success 'Badass macOS terminal installed!'
+      echo '"' 
     return 0;
   else 
     ./Applications/iTerm2
+    echo '"' 
     success 'Badass macOS terminal installed!'
+    echo '"' 
     return 0;
 fi

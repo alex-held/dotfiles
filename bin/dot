@@ -2,7 +2,7 @@
 # dot
 #
 # `dot` handles installation, updates, things like that. Run it periodically
-# to make sure you're on the latest and greatest.
+# to make sure you're on the latest version.
 
 set -e
 
