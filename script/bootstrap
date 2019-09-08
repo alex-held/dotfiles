@@ -184,21 +184,17 @@ backupBin () {
   echo "Lets back up your existing config files first."
   echo '"' 
   
-  if [ -d $HOME/bin ]; 
-    then # info "current $HOME/bin folder, checking for existing symlink"
-
-    if [ ! -L $HOME/bin ]; 
+  if [ ! -L $HOME/bin +a -d $HOME/bin ]; 
       then  # $HOME/bin not a symlink
-      
-      echo '"'
-      info "$HOME/bin is not a symlink, I create backup ."
-      sudo mv $HOME/bin bin_old && success "You can find your data here: $HOME/bin_old"
-      echo '"'
-
+        echo '"'
+        success "$HOME/bin is not a symlink, I create a backup ."
+        sudo mv $HOME/bin bin_old && success "You can find your data here: $HOME/bin_old"
+        echo '"'
       else
-    fi
-  else
-fi
+        echo '"'
+        info "I could not find data to backup."
+        echo '"'
+  fi
 }
 
 
