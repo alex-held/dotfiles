@@ -170,7 +170,7 @@ backupBin () {
 
   success "Lets backup your existing configurtion files first."
   
-  if [ ! -L $HOME/bin +a -d $HOME/bin ]; 
+  if [ ! -L $HOME/bin ] &&  [ -d $HOME/bin ]; 
       then  # $HOME/bin not a symlink
         info "$HOME/bin is not a symlink, I create a backup ."
         sudo mv $HOME/bin bin_old && success "You can find your data here: $HOME/bin_old"
