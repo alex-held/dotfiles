@@ -208,9 +208,8 @@ echo '"'
 
 if ! (git clone --quiet https://github.com/alex-held/dotfiles.git $1) 
     then
-        echo "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $DOTFILES ." >> settzing_Defaults 2&> exit 1;
-    elif [ -d $1 ];
-    then
+        "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $DOTFILES ." >> settzing_Defaults 2&> exit 1;
+    else
         export DOTFILES=$1;
         $DOTFILES/script/bootstrap
 fi
