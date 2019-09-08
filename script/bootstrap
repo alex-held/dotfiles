@@ -18,7 +18,6 @@ success () {
 fail () {
   printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
   echo ''
-  exit
 }
 
 user "Willkommen: $DOTFILES" dev/null
@@ -218,7 +217,7 @@ alex_configFix () {
    echo "Fixing .config permissions"
 
   if ! [ -d "$HOME/.config" ]; then
-    "$HOME/.config doesn't exist" | echo > dev/null
+    user "$HOME/.config doesn't exist" 
   else
     sudo chown $(whoami) $HOME/.config 
     success '.config permissions fixed'
@@ -246,7 +245,7 @@ alex_itermConfig () {
       if [[ $REPLY =~ ^[Yy]$ ]]
       then
 
-          defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.itermcfg/" | success
+          defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.itermcfg/" > success
           defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
 
           if [[ $? -eq 0 ]]
@@ -280,7 +279,7 @@ alex_itermConfig () {
             "random")
                 export ZSH_THEME="random";
                 ;;
-            *) user "invalid option $REPLY";;
+            *) fail "invalid option $REPLY";;
         esac
     done
     success 'Perfect choice !'
@@ -296,7 +295,7 @@ iterm_setup() {
       then
           success "Successfully configured iTerm2 to use my settings!"
       else
-          fail "failed to apply my settings." > dev/null;
+          fail "failed to apply my settings." 
       fi
 }
 
