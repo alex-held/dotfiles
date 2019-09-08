@@ -206,14 +206,14 @@ echo '"'
 echo "Cloning the tempate repository into $1"
 echo '"'
 
-folder=$
 if ! (git clone --quiet https://github.com/alex-held/dotfiles.git $1) 
     then
         echo "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $DOTFILES ." >> settzing_Defaults 2&> exit 1;
     elif [ -d $1 ];
     then
         export DOTFILES=$1;
-    elif ! "$DOTFILES/script/bootstrap" && cd $DOTFILES;
+    elif -n "$DOTFILES/script/bootstrap" 
+        exit 0;
     else 
         info "Sorry! The dotfiles could not applied successfully ..." >> settzing_Defaults 2&> exit 1;
 fi
