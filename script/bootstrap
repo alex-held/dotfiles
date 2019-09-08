@@ -21,13 +21,13 @@ fail () {
   exit
 }
 
-user "Willkommen: $DOTFILES" 2%> dev/null
+user "Willkommen: $DOTFILES" dev/null
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd -P)
 
 set -e
 
-success 'Starting to installing your Badass macOS terminal!!'
+success 'Starting to installing your Badass macOS terminal!!' 
 
 
 setup_gitconfig() {
@@ -246,14 +246,14 @@ alex_itermConfig () {
       if [[ $REPLY =~ ^[Yy]$ ]]
       then
 
-          defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.itermcfg/" | success 2&> > dev/null
+          defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.itermcfg/" | success
           defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
 
           if [[ $? -eq 0 ]]
           then
               success "I could set you my preferences successfully!"
           else
-              fail "failed to apply my settings." >&2
+              fail "failed to apply my settings." 
           fi
       fi
 
@@ -296,7 +296,7 @@ iterm_setup() {
       then
           success "Successfully configured iTerm2 to use my settings!"
       else
-          fail "failed to apply my settings." >&2 >> dev/null;
+          fail "failed to apply my settings." > dev/null;
       fi
 }
 
