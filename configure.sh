@@ -212,11 +212,12 @@ if ! (git clone --quiet https://github.com/alex-held/dotfiles.git $1)
     elif [ -d $1 ];
     then
         export DOTFILES=$1;
-    elif -n "$DOTFILES/script/bootstrap" 
-        exit 0;
-    else 
-        info "Sorry! The dotfiles could not applied successfully ..." >> settzing_Defaults 2&> exit 1;
+        $DOTFILES/script/bootstrap
 fi
+        exit 0;
+  #  else 
+   #     info "Sorry! The dotfiles could not applied successfully ..." >> settzing_Defaults 2&> exit 1;
+
 
 }
 
