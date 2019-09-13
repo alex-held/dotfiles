@@ -20,7 +20,6 @@ fail () {
   echo ''
 }
 
-user "Willkommen: $DOTFILES" dev/null
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd -P)
 
@@ -258,12 +257,7 @@ alex_itermConfig () {
 
     echo 'Please choose a theme: ' 
     options=("spaceship" "powerline10k" "powerlevel9k" "random")
-    
-    #for theme in "${options[@]}"
-    #do
-     # echo theme > dev/null
-    #done
-    
+
     select opt in "${options[@]}"
     do
         case $opt in

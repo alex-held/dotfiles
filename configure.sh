@@ -44,6 +44,11 @@ brewUpdate () {
     success 'brew updated'
 }
 
+brewBundle() {
+    info "Bundling brewfile..."
+    brew bundle "$(curl -fsSL https://raw.githubusercontent.com/alex-held/dotfiles/master/Brewfile)"
+}
+
 zshInstall () {
     # zsh install
     # todo add in check for macOS 10.15 since zsh is default
@@ -236,7 +241,7 @@ setting_Defaults() {
 brewInstall
 brewUpdate
 #brewUpgrade
-#brewBundle
+brewBundle
 
 # zsh setup
 zshInstall
