@@ -50,12 +50,11 @@ dotfiles="$HOME/.dotfiles"
 
 if [ -d $dotfiles ]; then
   export DOTFILES=$dotfiles;
-  sudo $DOTFILES/script/bootstrap
+  sudo $dotfiles/script/bootstrap
 else
   clone
   export DOTFILES=$dotfiles;
-  wait
-  sudo $DOTFILES/script/bootstrap
+  sudo $dotfiles/script/bootstrap
 fi
 
 clone() {
