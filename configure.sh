@@ -46,18 +46,19 @@ fi
 
 
 info "Bootstrapping alexheld's dotfiles (https://github.com/alex-held/dotfiles)."
-if [ -d "$HOME/.dotfiles" ]; then
-    read -p "There is already a directory at $($HOME/.dotfiles). Do you want me to override it? y/n" -n 1 -r
+dotfiles="$HOME/.dotfiles"
+if [ -d dotfiles ]; then
+
+    read -p "There is already a directory at $dotfiles. Do you want me to override it? y/n" -n 1 -r
 
     if [[ $REPLY =~ ^[Nn]$ ]]; then 
-        rm -rdf "$HOME/.dotfiles"
+        rm -rdf $dotfiles
     else
-        fail "Cannot clone alex-held's dotfiles, because there is already a directory at $HOME/.dotfiles. Please delete it and try again."
+        fail "Cannot clone alex-held's dotfiles, because there is already a directory at $dotfiles. Please delete it and try again."
         exit 1;
     fi
 
 else
-    local dotfiles="$HOME/.dotfiles"
     
     if test ! $(which git); then
         info 'git is not installed. -> installing git'
@@ -68,8 +69,8 @@ else
     fi
 
     info "Cloning alex-held dotfiles repository into $dotfiles"
-    if [ ! $(git clone --quiet https://github.com/alex-held/dotfiles.git $dotfiles) ]; then
-        "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $dotfiles ." 
+    if ! (git clone --quiet https://github.com/alex-held/dotfiles.git $dotfiles) then
+        echo "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $dotfiles ." 
         exit 1
     else
         export DOTFILES=$dotfiles;
