@@ -186,7 +186,7 @@ alex_Symlinks () {
   
   ln -s $HOME/.dotfiles/bin $HOME/bin && success "symlinked: $HOME/bin ~> $HOME/.dotfiles/bin !"
 
-  #ln -s $HOME/.dotfiles/tmux $HOME/.tmux && success "symlink for $HOME/.tmux folder created"
+  ln -s $HOME/.dotfiles/tmux $HOME/.tmux && success "symlink for $HOME/.tmux folder created"
 
   #if [ -d $HOME/Library/Application\ Support/Code/User ] ; then
   #  echo "Making backup of current settings.json and creating symlink..."
@@ -256,10 +256,11 @@ iterm_setup() {
     fi
 }
 
+ohmyzshInstall
 
 install_dotfiles
 
-ohmyzshInstall
+
 
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
