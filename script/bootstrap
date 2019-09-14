@@ -222,16 +222,11 @@ then
   if source $DOTFILES/script/runner | while read -r data; do info "$data"; done
   then
     success "dependencies installed"
-    echo ''
-    echo "Now updating dependencies..."
-    pip3 install --upgrade setuptools
   else
     fail "error installing dependencies"
   fi
 fi
 
-
-#$DOTFILES/script/install
 
 backupBin
 alex_Symlinks
