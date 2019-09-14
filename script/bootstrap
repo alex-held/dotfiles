@@ -26,8 +26,6 @@ export DOTFILES=$DOTFILES_ROOT
 
 set -e
 
-
-
 success 'Starting to installing your Badass macOS terminal!!' 
 success "DOTFILES environment set: $DOTFILES"
 
