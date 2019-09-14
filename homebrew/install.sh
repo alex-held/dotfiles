@@ -29,19 +29,22 @@ if test ! $(which brew)
     info 'brew is already installed'
 fi
 
+brewdir="$DOTFILES/homebrew"
 
 brew update
 success 'brew updated'
 
 info 'Setting up Taps'
-while read in; do brew tap "$in"; done < Taps
+while read in; do brew tap "$in"; done < ./Taps
 success 'Tapped into all 3rd party taps!'
 
 info 'Installing formulea'
+brewfile="$brewdir/Brewfile"
 brew install $(cat Brewfile|grep -v "#")
 success 'Installed all formulea!'
 
 info 'Installing Casks'
+caskfile="$brewdir/Caskfile"
 brew cask install $(cat Caskfile|grep -v "#")
 success 'Installed all casks!'
 
