@@ -51,7 +51,7 @@ clone() {
     user ' - What is your git author email?'
     read -e git_authoremail
 
-    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" "$dotfiles/git/gitconfig.local.symlink.example" > git/gitconfig.local.symlink
+    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" "$dotfiles/git/gitconfig.local.symlink.example" > "$dotfiles/git/gitconfig.local.symlink"
 
     success 'gitconfig'
   fi
