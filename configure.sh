@@ -55,11 +55,11 @@ if [ -d "$HOME/.dotfiles" ]; then
         fail "Cannot clone alex-held's dotfiles, because there is already a directory at $HOME/.dotfiles. Please delete it and try again."
         exit 1;
     fi
+
 else
     local dotfiles="$HOME/.dotfiles"
     
-    if test ! $(which git); 
-    then
+    if test ! $(which git); then
         info 'git is not installed. -> installing git'
         brew install git
         success 'installed git'
@@ -68,8 +68,7 @@ else
     fi
 
     info "Cloning alex-held dotfiles repository into $dotfiles"
-    if ! (git clone --quiet https://github.com/alex-held/dotfiles.git $dotfiles) 
-    then
+    if [ ! (git clone --quiet https://github.com/alex-held/dotfiles.git $dotfiles) ]; then
         "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $dotfiles ." 
         exit 1
     else
