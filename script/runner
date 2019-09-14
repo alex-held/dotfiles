@@ -38,8 +38,6 @@ displayUsageAndExit() {
 # 	shift
 # done
 
-# Init git
-sh $DOTFILES/git/install.sh
 
 # Set macOS defaults
 sh $DOTFILES/macos/set-defaults.sh
