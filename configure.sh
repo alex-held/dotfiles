@@ -27,7 +27,7 @@ clone() {
       brew install git
       success 'installed git'
   else
-        info 'git is already installed.'
+      info 'git is already installed.'
   fi
 
   info "Cloning alex-held dotfiles repository into $dotfiles"
@@ -66,9 +66,9 @@ info "Bootstrapping alexheld's dotfiles (https://github.com/alex-held/dotfiles).
 dotfiles="$HOME/.dotfiles"
 
 if [ -d $dotfiles ]; then
-  sudo $dotfiles/script/bootstrap $dotfiles
+  $dotfiles/script/bootstrap $dotfiles
 else
   clone
-  sudo $dotfiles/script/bootstrap $dotfiles
+  $dotfiles/script/bootstrap $dotfiles
 fi
 
