@@ -35,7 +35,8 @@ brew update
 success 'brew updated'
 
 info 'Setting up Taps'
-while read in; do brew tap "$in"; done < ./Taps
+tapsfile="$brewdir/Taps"
+while read in; do brew tap "$in"; done < tapsfile
 success 'Tapped into all 3rd party taps!'
 
 info 'Installing formulea'
