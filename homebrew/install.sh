@@ -7,26 +7,6 @@
 source $HOME/.dotfiles/script/prompt
 
 
-installTaps () {  
-    info 'Setting up Taps'
-    while read in; do brew tap "$in"; done < $1
-    success 'Tapped into all 3rd party taps!'
-}
-
-installBrews () {
-    info 'Installing formulea'
-    brew install $(cat $1 | grep -v "#")
-    success 'Installed all formulea!'
-}
-
-installCasks () {
-    info 'Installing Casks'
-    brew cask install $(cat $1 | grep -v "#")
-    success 'Installed all casks!'
-}
-
-
-
 # Check for Homebrew
 if test ! $(which brew)
   then
@@ -53,13 +33,16 @@ fi
 brew update
 success 'brew updated'
 
-brew install git
-success 'git installed'
+info 'Setting up Taps'
+while read in; do brew tap "$in"; done < Taps
+success 'Tapped into all 3rd party taps!'
 
-installTaps "Taps"
-installBrews "Brewfile"
-installCasks "Caskfile"
+info 'Installing formulea'
+brew install $(cat Brewfile | grep -v "#")
+success 'Installed all formulea!'
 
-exit
+info 'Installing Casks'
+brew cask install $(cat Caskfile | grep -v "#")
+success 'Installed all casks!'
 
 
