@@ -235,11 +235,7 @@ iterm_setup() {
     fi
 }
 
-ohmyzshInstall
-
 install_dotfiles
-
-
 
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
