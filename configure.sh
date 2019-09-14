@@ -47,12 +47,15 @@ firstInstall () {
     info "Bootstrapping alexheld's dotfiles (https://github.com/alex-held/dotfiles)."
     if [ -d $HOME/.dotfiles ];
     then
-        fail "Cannot bootstrap dotfiles, because there is already a directory at $HOME/.dotfiles. Please delete it and try again."
-        exit 1;
+        if [ -z $"${DOTFILES:-}" ]; then
+            fail "Cannot bootstrap dotfiles, because there is already a directory at $HOME/.dotfiles. Please delete it and try again."
+            exit 1;
+        else
+            success "Setup DOTFILES environment variable for $DOTFILES"
+            return;
+        fi
     else
         export DOTFILES="$HOME/.dotfiles"
-        success "Setup DOTFILES environment variable for $DOTFILES"
-
         brewInstall
 
         if test ! $(which git); 
@@ -102,7 +105,7 @@ installCasks () {
 }
 
 bootstrapBrew() {
-    if [ -z "${$DOTBREW:-}" ]; then
+    if [ -z "${DOTBREW:-}" ]; then
         export DOTBREW="$DOTFILES/homebrew"
     else
         success "DOTBREW env variable already set up."
