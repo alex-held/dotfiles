@@ -21,29 +21,24 @@ fail () {
 }
 
 brewInstall () {
-  # Check for Homebrew
-  if test ! $(which brew)
-    then
+    if test ! $(which brew); then
 
-      info "Installing Homebrew for you. "
-
-      # Install the correct homebrew for each OS type
-      if test "$(uname)" = "Darwin"
-      then
-        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-        success 'brew installed'
-
-      elif test "$(expr substr $(uname -s) 1 5)" = "Linux"
-      then
-        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
-        success 'brew installed'
-      fi
+    info "Installing Homebrew for you. "
+    # Install the correct homebrew for each OS type
+        if test "$(uname)" = "Darwin"
+        then
+            ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+            success 'brew installed'
+        elif test "$(expr substr $(uname -s) 1 5)" = "Linux"
+        then
+            ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
+            success 'brew installed'
+        fi
     else
-      info 'brew is already installed'
-  fi
-
-  brew install git
+        info 'brew is already installed'
+    fi
 }
+
 
 brewUpdate () {
     brew update
@@ -81,13 +76,37 @@ configureGitCompletion () {
     fi
 }
 
+# ohmyzshInstall () {
+#     # oh-my-zsh install
+#     echo " [+] Installing the oh-my-zsh... " 
+#     curl -Lo install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+#     sh install.sh --unattended
+#     rm install.sh
+# }
+
 ohmyzshInstall () {
     # oh-my-zsh install
-    echo " [+] Installing the oh-my-zsh... " 
-    curl -Lo install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
-    sh install.sh --unattended
-    rm install.sh
+    if [ -d ~/.oh-my-zsh/ ] ; then
+    info 'oh-my-zsh is already installed...'
+    read -p "Would you like to update oh-my-zsh now? y/n " -n 1 -r
+    echo ''
+        if [[ $REPLY =~ ^[Yy]$ ]] ; then
+        cd ~/.oh-my-zsh && git pull
+            if [[ $? -eq 0 ]]
+            then
+                success "Update complete..." && cd
+            else
+                fail "Update not complete..." >&2 cd
+            fi
+        fi
+    else
+    echo "oh-my-zsh not found, now installing oh-my-zsh..."
+    echo ''
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
+    success 'oh-my-zsh installed'
+    fi
 }
+
 
 ohmyzshPluginInstall () {
     # oh-my-zsh plugin install
