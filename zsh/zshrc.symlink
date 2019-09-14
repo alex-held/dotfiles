@@ -90,6 +90,9 @@ DEFAULT_USER="$(whoami)"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+
+ZSH_COLORIZE_STYLE="colorful"
+
 plugins=(
     sudo 
     git 
@@ -103,6 +106,12 @@ plugins=(
     zsh-autosuggestions
     zsh-completions
     zsh-z)
+
+
+source $ZSH/oh-my-zsh.sh
+
+# Zsh-Completions
+fpath=(/usr/local/share/zsh-completions $fpath)
 
 # User configuration
 
@@ -168,9 +177,11 @@ export MONGO_PATH=/usr/local/mongodb
 export PATH=$PATH:$MONGO_PATH/bin
 #---- End Export ----
 
+
 #---- Source ----
 #[ -f ~/bin/fubectl.source ] && source ~/bin/fubectl.source
 #source <(kubectl completion zsh)
 source $(dirname $(gem which colorls))/tab_complete.sh
 #---- End Source ----
 #---- END CUSTOM ----
+
