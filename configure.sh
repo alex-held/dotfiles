@@ -41,6 +41,8 @@ brewInstall () {
     else
       info 'brew is already installed'
   fi
+
+  brew install git
 }
 
 brewUpdate () {
@@ -97,7 +99,7 @@ ohmyzshInstall () {
     else
     echo "oh-my-zsh not found, now installing oh-my-zsh..."
     echo ''
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" --unattended
     success 'oh-my-zsh installed'
     fi
 }
@@ -207,12 +209,12 @@ brewInstall
 brewUpdate
 
 # zsh setup
+ohmyzshInstall
 zshInstall
 zshZInstall
 configureGitCompletion
 
 # oh my zsh setup
-ohmyzshInstall
 ohmyzshPluginInstall
 pl9kInstall
 pl10kInstall
