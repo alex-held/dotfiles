@@ -49,9 +49,11 @@ info "Bootstrapping alexheld's dotfiles (https://github.com/alex-held/dotfiles).
 dotfiles="$HOME/.dotfiles"
 
 if [ -d $dotfiles ]; then
+  export DOTFILES=$dotfiles;
   sudo $DOTFILES/script/bootstrap
 else
   clone
+  export DOTFILES=$dotfiles;
   wait
   $DOTFILES/script/bootstrap
 fi
@@ -70,7 +72,5 @@ clone() {
   if ! (git clone --quiet https://github.com/alex-held/dotfiles.git $dotfiles) then
       echo "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $dotfiles." 
       exit 1
-  else
-      export DOTFILES=$dotfiles;
   fi
 }
