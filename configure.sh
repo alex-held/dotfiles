@@ -46,7 +46,7 @@ fi
 
 
 info "Bootstrapping alexheld's dotfiles (https://github.com/alex-held/dotfiles)."
-if [ -d $HOME/.dotfiles ];
+if [ -d "$HOME/.dotfiles" ];
 then
 
     read -p "There is already a directory at $($HOME/.dotfiles). Do you want me to override it? y/n" -n 1 -r
