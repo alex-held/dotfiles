@@ -24,15 +24,13 @@ cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd -P)
 export DOTFILES=$DOTFILES_ROOT
 
-echo "Dotfiles_root: $DOTFILES_ROOT"
-echo "dotfiles: $1"
 set -e
 
 
 
 success 'Starting to installing your Badass macOS terminal!!' 
-echo "Dotfiles_root: $DOTFILES_ROOT"
-echo "dotfiles: $1"
+success "Dotfiles_root: $DOTFILES_ROOT"
+success "dotfiles: $1"
 
 link_file() {
 
