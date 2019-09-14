@@ -211,14 +211,10 @@ iterm_setup() {
 
 install_dotfiles
 
-#sudo sh $DOTFILES/script/install
-
-
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
 then
   info "installing dependencies"
-  echo $(pwd -P)
   if source $DOTFILES/script/runner | while read -r data; do info "$data"; done
   then
     success "dependencies installed"
