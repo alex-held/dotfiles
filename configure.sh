@@ -43,8 +43,7 @@ brewInstall () {
     success 'brew updated'
 }
 
-
-init() {
+firstInstall () {
     info "Bootstrapping alexheld's dotfiles (https://github.com/alex-held/dotfiles)."
     if [ -d $HOME/.dotfiles ];
     then
@@ -75,8 +74,12 @@ init() {
     fi
 }
 
+
 installTaps () {
-    export DOTBREW=$DOTFILES/homebrew
+    if [[ -z "$DOTBREW" ]]; then
+        export DOTBREW=$DOTFILES/homebrew
+    fi
+    
     info 'Setting up Taps'
     while read in; do brew tap "$in"; done < $DOTBREW/Tap
     success 'Tapped into all 3rd party taps!'
@@ -104,6 +107,17 @@ bootstrapBrew() {
     installCasks
 }
 
+
+init() {
+    if [[ -z "$DOTFILES" ]]; then
+        firstInstall
+    else
+        info "Changing directory into $DOTFILES"
+        pwd
+        cd $DOTFILES
+        pwd
+    fi
+}
 
 init
 bootstrapBrew
