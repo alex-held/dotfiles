@@ -29,8 +29,8 @@ set -e
 
 
 success 'Starting to installing your Badass macOS terminal!!' 
-success "Dotfiles_root: $DOTFILES_ROOT"
-success "dotfiles: $1"
+export DOTFILES="$1"
+
 
 link_file() {
 
