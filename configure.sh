@@ -109,7 +109,7 @@ bootstrapBrew() {
 
 
 init() {
-    if test ! -d "$HOME/.dotfiles" then
+    if test ! -d "$HOME/.dotfiles"; then
         firstInstall
     else
         info "Changing directory into $DOTFILES"
