@@ -1,5 +1,6 @@
 #!/bin/sh
 
+set -e
 
 parentDirectory="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -P)"
 dotfilesDirectory="$(cd "$( dirname "$parentDirectory" )" && pwd -P)"
@@ -32,7 +33,13 @@ while test $# -gt 0; do
 	shift
 done
 
-export DOTFILES=$HOME/.dotfiles
+echo $DOTFILES
+echo $DOTFILES
+echo $DOTFILES
+echo $DOTFILES
+echo $DOTFILES
+
+#export DOTFILES=$HOME/.dotfiles
 
 # Init git
 $DOTFILES/homebrew/git/install.sh

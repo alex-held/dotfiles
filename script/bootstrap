@@ -20,8 +20,10 @@ fail () {
   echo ''
 }
 
+
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd -P)
+
 export DOTFILES=$DOTFILES_ROOT
 
 set -e
@@ -215,8 +217,6 @@ install_dotfiles
 if [ "$(uname -s)" == "Darwin" ]
 then
   info "installing dependencies"
-  cd $DOTFILES
-  pwd
   if source script/runner | while read -r data; do info "$data"; done
   then
     success "dependencies installed"
