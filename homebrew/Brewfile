@@ -7,20 +7,20 @@ tmux
 tmate
 
 ## Productive stuff
-ack
-wget
+#ack
+#wget
 watch
 coreutils
-unrar
+#unrar
 
 ## Programming stuff
 rbenv
 ruby-build
-nvm
-npm
+#nvm
+#npm
 python
 python@2
 python3
-node
+#node
 git
-yarn
+#yarn
