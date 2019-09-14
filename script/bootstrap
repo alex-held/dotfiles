@@ -212,7 +212,7 @@ iterm_setup() {
 
 install_dotfiles
 
-$DOTFILES/script/install
+sudo sh $DOTFILES/script/install
 
 backupBin
 alex_Symlinks
