@@ -81,7 +81,7 @@ firstInstall () {
 installTaps () {  
     info 'Setting up Taps'
     tapfile="$DOTBREW/Taps"
-    while read in; do brew tap "$in"; done < $(cat $tapfile | grep -v "#")
+    while read in; do brew tap "$in"; done < $tapfile #$(cat $tapfile | grep -v "#")
     success 'Tapped into all 3rd party taps!'
 }
 

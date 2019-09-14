@@ -1,11 +1,2 @@
-## brew cask and more versions of casks
 homebrew/cask-versions
-
-## Add tap for Pivotal
-#pivotal/tap
-
-## Tap for packer
-#homebrew/binary
-
-## Tap for tmate
-#nviennot/tmate
+homebrew/bundle
