@@ -83,25 +83,10 @@ configureGitCompletion () {
 
 ohmyzshInstall () {
     # oh-my-zsh install
-    if [ -d ~/.oh-my-zsh/ ] ; then
-    info 'oh-my-zsh is already installed...'
-    read -p "Would you like to update oh-my-zsh now? y/n " -n 1 -r
-    echo ''
-        if [[ $REPLY =~ ^[Yy]$ ]] ; then
-        cd ~/.oh-my-zsh && git pull
-            if [[ $? -eq 0 ]]
-            then
-                success "Update complete..." && cd
-            else
-                fail "Update not complete..." >&2 cd
-            fi
-        fi
-    else
-    echo "oh-my-zsh not found, now installing oh-my-zsh..."
-    echo ''
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" --unattended
-    success 'oh-my-zsh installed'
-    fi
+    echo " [+] Installing the oh-my-zsh... " 
+    curl -Lo install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+    sh install.sh --unattended
+    rm install.sh
 }
 
 ohmyzshPluginInstall () {
