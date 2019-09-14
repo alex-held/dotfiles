@@ -2,6 +2,7 @@
 # Spaceship
 #
 
+
 SPACESHIP_CHAR_SYMBOL="➤  "
 SPACESHIP_PROMPT_ORDER=(
   time          # Time stamps section
