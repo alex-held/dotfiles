@@ -22,13 +22,12 @@ fail () {
 
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd -P)
-
+export DOTFILES=$DOTFILES_ROOT
 set -e
 
+
+
 success 'Starting to installing your Badass macOS terminal!!' 
-
-
-
 
 
 link_file() {
@@ -106,6 +105,7 @@ link_file() {
   fi
 }
 
+
 install_dotfiles () {
 
   success 'Installing dotfiles'
@@ -118,10 +118,6 @@ install_dotfiles () {
     link_file "$src" "$dst"
   done
 }
-
-setup_gitconfig
-install_dotfiles
-
 
 backupBin () {
 
@@ -171,9 +167,7 @@ alex_colors () {
 
 
 alex_configFix () {
-
-   echo "Fixing .config permissions"
-
+  echo "Fixing .config permissions"
   if ! [ -d "$HOME/.config" ]; then
     user "$HOME/.config doesn't exist" 
   else
@@ -189,80 +183,47 @@ alex_fontSetup () {
 }
 
 
-
-alex_itermConfig () {
-
+iterm_setup() {
+   
   if ! [ -f /Applications/iTerm2 ]; 
       then 
       return 0;
     else 
 
-      success 'I see you are already using iTerm2.'
+      success 'I you are already using iTerm2.'
       read -p " Do you like to try my profile settings? y/n " -n 1 -r
 
       if [[ $REPLY =~ ^[Yy]$ ]]
       then
 
-          defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.itermcfg/" > success
+          defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.itermcfg/"
           defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
 
           if [[ $? -eq 0 ]]
           then
-              success "I could set you my preferences successfully!"
+              success "I could not set the preferences successfully!"
           else
-              fail "failed to apply my settings." 
+              fail "failed to apply the settings." 
           fi
       fi
-
-    echo 'Please choose a theme: ' 
-    options=("spaceship" "powerline10k" "powerlevel9k" "random")
-
-    select opt in "${options[@]}"
-    do
-        case $opt in
-            "spaceship")
-                export ZSH_THEME=$opt
-                ;;
-            "powerline10k")
-                export ZSH_THEME="$opt/$opt"
-                ;;
-            "powerlevel9k")
-                export ZSH_THEME="$opt/$opt"
-                ;;
-            "random")
-                export ZSH_THEME="random";
-                ;;
-            *) fail "invalid option $REPLY";;
-        esac
-    done
-    success 'Perfect choice !'
-  fi  
+    fi
 }
 
-iterm_setup() {
-   
-    defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.itermcfg/"
-    defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
-    
-      if [[ $? -eq 0 ]]
-      then
-          success "Successfully configured iTerm2 to use my settings!"
-      else
-          fail "failed to apply my settings." 
-      fi
-}
 
+install_dotfiles
+
+$DOTFILES/script/install
 
 backupBin
 alex_Symlinks
 alex_colors
 alex_fontSetup
-#iterm_setup
+iterm_setup
 alex_itermConfig
 alex_configFix
 
 
-read -p "Should I setup zsh as your default shell? y/n " -n 1 -r
+info "Settings zsh as your default shell.."
 if [[ $REPLY =~ ^[Yy]$ ]] 
   then
     chsh -s /bin/zsh

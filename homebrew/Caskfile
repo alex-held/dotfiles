@@ -1,37 +1,19 @@
-# Terminal
 iterm2-beta
-
-## Work
 firefox
 microsoft-teams
 1password
-alfred2
-#nordvpn
-
-
-# Env
+alfred3
 mongodb
-
-## Coding
 visual-studio-code
 
-
-
-
-## Boxes
-# Virtualization
+#nordvpn
 #vagrant
 #virtualbox
-# Containers
 #dockertoolbox
-# Proper screen ligthing
-#flux
 
 # QuickLook plugins
 #qlcolorcode qlstephen qlmarkdown quicklook-json betterzipql suspicious-package
 
-# Window management
-#spectacle
 
 
 
