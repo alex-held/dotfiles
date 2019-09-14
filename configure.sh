@@ -102,6 +102,11 @@ installCasks () {
 }
 
 bootstrapBrew() {
+    if [ -z "${$DOTBREW:-}" ]; then
+        export DOTBREW="$DOTFILES/homebrew"
+    else
+        success "DOTBREW env variable already set up."
+    fi
     installTaps
     installBrews
     installCasks
@@ -109,15 +114,14 @@ bootstrapBrew() {
 
 
 init() {
-    [ -z "${DOTFILES:-}" ] && echo "Empty" || echo "Not empty"
-    # if test ! -d "$HOME/.dotfiles"; then
-    #     firstInstall
-    # else
-    #     info "Changing directory into $DOTFILES"
-    #     pwd
-    #     cd $DOTFILES
-    #     pwd
-    # fi
+    if [ -z "${SOME_VARIABLE:-}" ]; then
+        firstInstall
+    else
+        info "Changing directory into $DOTFILES"
+        pwd
+        cd $DOTFILES
+        pwd
+    fi
 }
 
 init
