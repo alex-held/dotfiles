@@ -51,7 +51,7 @@ if [ -d $dotfiles ]; then
 
     read -p "There is already a directory at $dotfiles. Do you want me to override it? y/n" -n 1 -r
 
-    if [[ $REPLY =~ ^[Nn]$ ]]; then 
+    if [[ $REPLY =~ ^[Yy]$ ]]; then 
         echo "deleting directory $dotfiles"
         rm -rdf $dotfiles > dev/null
     else
