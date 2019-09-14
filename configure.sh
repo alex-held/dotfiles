@@ -109,7 +109,7 @@ bootstrapBrew() {
 
 
 init() {
-    [ -z "$DOTFILES" ] && echo "Empty" || echo "Not empty"
+    [ -z "${DOTFILES:-}" ] && echo "Empty" || echo "Not empty"
     # if test ! -d "$HOME/.dotfiles"; then
     #     firstInstall
     # else
