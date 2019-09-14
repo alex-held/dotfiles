@@ -50,7 +50,7 @@ firstInstall () {
         fail "Cannot bootstrap dotfiles, because there is already a directory at $HOME/.dotfiles. Please delete it and try again."
         exit 1;
     else
-        export DOTFILES=$HOME/.dotfiles 
+        export DOTFILES="$HOME/.dotfiles"
         success "Setup DOTFILES environment variable for $DOTFILES"
 
         brewInstall
@@ -77,7 +77,7 @@ firstInstall () {
 
 installTaps () {
     if [[ -z "$DOTBREW" ]]; then
-        export DOTBREW=$DOTFILES/homebrew
+        export DOTBREW="$DOTFILES/homebrew"
     fi
     
     info 'Setting up Taps'
