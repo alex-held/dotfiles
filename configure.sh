@@ -47,34 +47,30 @@ fi
 
 info "Bootstrapping alexheld's dotfiles (https://github.com/alex-held/dotfiles)."
 dotfiles="$HOME/.dotfiles"
+
 if [ -d $dotfiles ]; then
-
-    read -p "There is already a directory at $dotfiles. Do you want me to override it? y/n" -n 1 -r
-
-    if [[ $REPLY =~ ^[Yy]$ ]]; then 
-        echo "deleting directory $dotfiles"
-        rm -rdf $dotfiles > dev/null
-    else
-        fail "Cannot clone alex-held's dotfiles, because there is already a directory at $dotfiles. Please delete it and try again."
-        exit 1;
-    fi
-
+  sudo $DOTFILES/script/bootstrap
 else
-    
-    if test ! $(which git); then
-        info 'git is not installed. -> installing git'
-        brew install git
-        success 'installed git'
-    else
-        info 'git is already installed.'
-    fi
-
-    info "Cloning alex-held dotfiles repository into $dotfiles"
-    if ! (git clone --quiet https://github.com/alex-held/dotfiles.git $dotfiles) then
-        echo "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $dotfiles." 
-        exit 1
-    else
-        export DOTFILES=$dotfiles;
-        $DOTFILES/script/bootstrap
-    fi
+  clone
+  wait
+  $DOTFILES/script/bootstrap
 fi
+
+clone() {
+
+  if test ! $(which git); then
+      info 'git is not installed. -> installing git'
+      brew install git
+      success 'installed git'
+  else
+        info 'git is already installed.'
+  fi
+
+  info "Cloning alex-held dotfiles repository into $dotfiles"
+  if ! (git clone --quiet https://github.com/alex-held/dotfiles.git $dotfiles) then
+      echo "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $dotfiles." 
+      exit 1
+  else
+      export DOTFILES=$dotfiles;
+  fi
+}
