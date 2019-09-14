@@ -69,10 +69,11 @@ else
 
     info "Cloning alex-held dotfiles repository into $dotfiles"
     if ! (git clone --quiet https://github.com/alex-held/dotfiles.git $dotfiles) 
-then
-    "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $dotfiles ." 
-    exit 1
-else
-    export DOTFILES=$dotfiles;
-    $DOTFILES/script/bootstrap
+    then
+        "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $dotfiles ." 
+        exit 1
+    else
+        export DOTFILES=$dotfiles;
+        $DOTFILES/script/bootstrap
+    fi
 fi
