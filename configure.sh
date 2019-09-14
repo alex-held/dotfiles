@@ -78,13 +78,9 @@ firstInstall () {
 }
 
 
-installTaps () {
-    if [[ -z "$DOTBREW" ]]; then
-        export DOTBREW="$DOTFILES/homebrew"
-    fi
-    
+installTaps () {  
     info 'Setting up Taps'
-    while read in; do brew tap "$in"; done < $DOTBREW/Tap
+    while read in; do brew tap "$in"; done < "$DOTBREW/Tap"
     success 'Tapped into all 3rd party taps!'
 }
 
@@ -110,6 +106,7 @@ bootstrapBrew() {
     else
         success "DOTBREW env variable already set up."
     fi
+
     installTaps
     installBrews
     installCasks
