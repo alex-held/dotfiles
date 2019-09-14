@@ -5,10 +5,11 @@ zsh-syntax-highlighting
 bash-completion
 tmux
 tmate
+spaceman-diff
 
 ## Productive stuff
-#ack
-#wget
+ack
+wget
 watch
 coreutils
 #unrar
@@ -16,11 +17,11 @@ coreutils
 ## Programming stuff
 rbenv
 ruby-build
-#nvm
-#npm
+nvm
+npm
 python
 python@2
 python3
-#node
+node
 git
 #yarn
