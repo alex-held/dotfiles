@@ -233,9 +233,7 @@ alex_Symlinks
 alex_colors
 alex_fontSetup
 iterm_setup
-alex_itermConfig
 alex_configFix
-
 
 info "Settings zsh as your default shell.."
 if [[ $REPLY =~ ^[Yy]$ ]] 
