@@ -80,7 +80,7 @@ firstInstall () {
 
 installTaps () {  
     info 'Setting up Taps'
-    while read in; do brew tap "$in"; done < "$DOTBREW/Tap"
+    while read in; do brew tap "$in"; done < "$DOTBREW/Taps"
     success 'Tapped into all 3rd party taps!'
 }
 
