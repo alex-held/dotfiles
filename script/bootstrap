@@ -28,30 +28,7 @@ set -e
 success 'Starting to installing your Badass macOS terminal!!' 
 
 
-setup_gitconfig() {
 
-  info "Setting up git"
-  
-  if ! [ -f git/gitconfig.local.symlink ]
-  then
-    info 'Setting up gitconfig'
-
-    git_credential='cache'
-    if [ "$(uname -s)" == "Darwin"]
-    then
-      git_credential='osxkeychain'
-    fi
-
-    user ' - What is your git author name?'
-    read -e git_authorname
-    user ' - What is your git author email?'
-    read -e git_authoremail
-
-    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
-
-    success 'gitconfig'
-  fi
-}
 
 
 link_file() {
@@ -144,24 +121,6 @@ install_dotfiles () {
 
 setup_gitconfig
 install_dotfiles
-
-
-install_Dependencies() 
-{
-  success "Starting to brew 🍺 your dependecies."
-
-  if [ "$(uname -s)" == "Darwin" ]
-  then
-    if source bin/dot | while read -r data; do info "$data"; done
-    then
-      success "Installed depedencies !"
-      #pip3 install --upgrade setuptools --user python
-    else
-      fail "error installing dependencies"
-    fi
-  fi
-}
-
 
 
 backupBin () {
