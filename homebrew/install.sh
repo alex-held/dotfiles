@@ -38,11 +38,11 @@ while read in; do brew tap "$in"; done < Taps
 success 'Tapped into all 3rd party taps!'
 
 info 'Installing formulea'
-brew install $(cat Brewfile | grep -v "#")
+brew install $(cat Brewfile|grep -v "#")
 success 'Installed all formulea!'
 
 info 'Installing Casks'
-brew cask install $(cat Caskfile | grep -v "#")
+brew cask install $(cat Caskfile|grep -v "#")
 success 'Installed all casks!'
 
 
