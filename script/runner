@@ -1,4 +1,9 @@
 #!/bin/sh
+#
+# dot
+#
+# `dot` handles installation, updates, things like that. Run it periodically
+# to make sure you're on the latest and greatest.
 
 set -e
 
@@ -16,22 +21,22 @@ displayUsageAndExit() {
 	exit
 }
 
-while test $# -gt 0; do
-	case "$1" in
-		"-h"|"--help")
-			displayUsageAndExit
-			;;
-		"-e"|"--edit")
-			exec "$EDITOR" "$dotfilesDirectory"
-			exit
-			;;
-		*)
-			echo "Invalid option: $1"
-			displayUsageAndExit
-			;;
-	esac
-	shift
-done
+# while test $# -gt 0; do
+# 	case "$1" in
+# 		"-h"|"--help")
+# 			displayUsageAndExit
+# 			;;
+# 		"-e"|"--edit")
+# 			exec "$EDITOR" "$dotfilesDirectory"
+# 			exit
+# 			;;
+# 		*)
+# 			echo "Invalid option: $1"
+# 			displayUsageAndExit
+# 			;;
+# 	esac
+# 	shift
+# done
 
 echo $DOTFILES
 echo $DOTFILES
