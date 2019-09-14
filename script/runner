@@ -38,5 +38,5 @@ export DOTFILES=$HOME/.dotfiles
 $DOTFILES/macos/set-defaults.sh
 
 # Install software
-echo "› $ZSH/script/install"
+echo "› $DOTFILES/script/install"
 $DOTFILES/script/install
