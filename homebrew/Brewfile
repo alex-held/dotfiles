@@ -11,7 +11,7 @@ spaceman-diff
 ack
 wget
 watch
-coreutils
+#coreutils
 #unrar
 
 ## Programming stuff

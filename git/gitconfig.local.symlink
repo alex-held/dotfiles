@@ -1,0 +1,5 @@
+[user]
+        name = alex-held
+        email = aheld.ext@igus.net
+[credential]
+        helper = cache

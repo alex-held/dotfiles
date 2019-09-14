@@ -17,31 +17,7 @@ success () {
 
 fail () {
   printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
-  echo ''
 }
-
-setup_gitconfig () {
-  if ! [ -f git/gitconfig.local.symlink ]
-  then
-    info 'setup gitconfig'
-
-    git_credential='cache'
-    if [ "$(uname -s)" == "Darwin" ]
-    then
-      git_credential='osxkeychain'
-    fi
-
-    user ' - What is your github author name?'
-    read -e git_authorname
-    user ' - What is your github author email?'
-    read -e git_authoremail
-
-    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
-
-    success 'gitconfig'
-  fi
-}
-
 
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd -P)
@@ -49,12 +25,12 @@ DOTFILES_ROOT=$(pwd -P)
 export DOTFILES=$DOTFILES_ROOT
 export ZSH=$DOTFILES_ROOT
 
-set -e
+
+export DOTFILES="~/.dotfiles"
 
 success 'Starting to installing your Badass macOS terminal!!' 
 success "DOTFILES environment set: $DOTFILES"
 
-setup_gitconfig
 
 link_file() {
 
@@ -145,18 +121,18 @@ install_dotfiles () {
   done
 }
 
-backupBin () {
+# backupBin () {
 
-  success "Lets backup your existing configurtion files first."
+#   success "Lets backup your existing configurtion files first."
   
-  if ! [ -L $HOME/bin ] && [ -d $HOME/bin ]; 
-      then  # $HOME/bin not a symlink
-        info "$HOME/bin is not a symlink, I create a backup ."
-        sudo mv $HOME/bin bin_old && success "You can find your data here: $HOME/bin_old"
-      else
-        info "I could not find data to backup."
-  fi
-}
+#   if ! [ -L $HOME/bin ] && [ -d $HOME/bin ]; 
+#       then  # $HOME/bin not a symlink
+#         info "$HOME/bin is not a symlink, I create a backup ."
+#         sudo mv $HOME/bin bin_old && success "You can find your data here: $HOME/bin_old"
+#       else
+#         info "I could not find data to backup."
+#   fi
+# }
 
 
 alex_Symlinks () {
@@ -166,111 +142,92 @@ alex_Symlinks () {
   ln -s $HOME/.dotfiles/bin $HOME/bin && success "symlinked: $HOME/bin ~> $HOME/.dotfiles/bin !"
 
   ln -s $HOME/.dotfiles/tmux $HOME/.tmux && success "symlink for $HOME/.tmux folder created"
-
-  #if [ -d $HOME/Library/Application\ Support/Code/User ] ; then
-  #  echo "Making backup of current settings.json and creating symlink..."
-  #  echo ''
-  #  mv $HOME/Library/Application\ Support/Code/User/settings.json $HOME/Library/Application\ Support/Code/User/settings.old.json && success "settings.old.json created"
-  #  ln -s $HOME/.dotfiles/code/settings.json $HOME/Library/Application\ Support/Code/User/settings.json && success "settings.json for vs code symlink created"
-  #else
-  #  info "symlink for vs code settings not created"
-  #  echo "VS Code does not appear to be installed or has not been launched yet. Cannot create symlink for VS Code User settings..."
-  #fi
-
-  #if ! [ -f /usr/local/bin/airport ]
-  #  then
-  #    sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
-  #    success "symlink for airport created"
-  #  else 
-  #    info "symlink for airport already exists"
-  #  fi
 }
 
 
-alex_colors () {
-  sudo gem install colorls &&  success "Settin up a color schema for your tty."
-}
+# alex_colors () {
+#   sudo gem install colorls &&  success "Settin up a color schema for your tty."
+# }
 
 
-alex_configFix () {
-  echo "Fixing .config permissions"
-  if ! [ -d "$HOME/.config" ]; then
-    user "$HOME/.config doesn't exist" 
-  else
-    sudo chown $(whoami) $HOME/.config 
-    success '.config permissions fixed'
-  fi
-}
+# alex_configFix () {
+#   echo "Fixing .config permissions"
+#   if ! [ -d "$HOME/.config" ]; then
+#     user "$HOME/.config doesn't exist" 
+#   else
+#     sudo chown $(whoami) $HOME/.config 
+#     success '.config permissions fixed'
+#   fi
+# }
 
-alex_fontSetup () {
-  success 'I search a freaky font.. ' 
-  cp $HOME/.dotfiles/Source\ Code\ Pro\ Nerd\ Font\ Complete.ttf /Library/Fonts
-  success "You go the: SourceCodeProNerdFont font !"
-}
+# alex_fontSetup () {
+#   success 'I search a freaky font.. ' 
+#   cp $HOME/.dotfiles/Source\ Code\ Pro\ Nerd\ Font\ Complete.ttf /Library/Fonts
+#   success "You go the: SourceCodeProNerdFont font !"
+# }
 
 
-iterm_setup() {
+# iterm_setup() {
    
-  if ! [ -f /Applications/iTerm2 ]; 
-      then 
-      return 0;
-    else 
+#   if ! [ -f /Applications/iTerm2 ]; 
+#       then 
+#       return 0;
+#     else 
 
-      success 'I you are already using iTerm2.'
-      read -p " Do you like to try my profile settings? y/n " -n 1 -r
+#       success 'I you are already using iTerm2.'
+#       read -p " Do you like to try my profile settings? y/n " -n 1 -r
 
-      if [[ $REPLY =~ ^[Yy]$ ]]
-      then
+#       if [[ $REPLY =~ ^[Yy]$ ]]
+#       then
 
-          defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.itermcfg/"
-          defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
+#           defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.itermcfg/"
+#           defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
 
-          if [[ $? -eq 0 ]]
-          then
-              success "I could not set the preferences successfully!"
-          else
-              fail "failed to apply the settings." 
-          fi
-      fi
-    fi
-}
+#           if [[ $? -eq 0 ]]
+#           then
+#               success "I could not set the preferences successfully!"
+#           else
+#               fail "failed to apply the settings." 
+#           fi
+#       fi
+#     fi
+# }
 
-install_dotfiles
+#install_dotfiles
 
 # If we're on a Mac, let's install and setup homebrew.
-if [ "$(uname -s)" == "Darwin" ]
-then
+
   info "installing dependencies"
-  if source script/runner | while read -r data; do info "$data"; done
+  if $DOTFILES/script/runner | while read -r data; do info "$data"; done
   then
     success "dependencies installed"
   else
     fail "error installing dependencies"
   fi
-fi
 
 
-backupBin
-alex_Symlinks
-alex_colors
-alex_fontSetup
-iterm_setup
-alex_configFix
 
-info "Settings zsh as your default shell.."
-if [[ $REPLY =~ ^[Yy]$ ]] 
-  then
-    chsh -s /bin/zsh
-    success "Perfect !"
-fi
+# backupBin
+# alex_Symlinks
+# alex_colors
+# alex_fontSetup
+# iterm_setup
+# alex_configFix
+
+# info "Settings zsh as your default shell.."
+# if [[ $REPLY =~ ^[Yy]$ ]] 
+#   then
+#     chsh -s /bin/zsh
+#     success "Perfect !"
+# fi
 
 
-if ! [ -f /Applications/iTerm2 ]; 
-  then
-      success 'Badass macOS terminal installed!'
-    exit 0;
-  else 
-    ./Applications/iTerm2
-    success 'Badass macOS terminal installed!'
-    exit 0;
-fi
+# if ! [ -f /Applications/iTerm2 ]; 
+#   then
+#       success 'Badass macOS terminal installed!'
+#     exit 0;
+#   else 
+#     ./Applications/iTerm2
+#     success 'Badass macOS terminal installed!'
+#     exit 0;
+# fi

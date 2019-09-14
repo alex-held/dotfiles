@@ -156,18 +156,6 @@ tmuxTpmInstall () {
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && success 'tmux tpm manager installed'
     fi
 }
-
-fubectlInstall () {
-    # fubectl install
-    # todo - move to after ~/bin check on bootstrap
-    if [ -f "$HOME/bin/fubectl.source" ]; then
-        info 'fubectl.source already exists'
-    else
-        echo "Now installing fubectl..."
-        curl -o "$HOME/bin/fubectl.source" -LO https://rawgit.com/kubermatic/fubectl/master/fubectl.source && success "fubectl placed in $HOME/bin"
-    fi
-}
-
 vundleInstall () {
     if [ -d "$HOME/.vim/bundle/Vundle.vim" ]; then
         info 'vundle already exists'
@@ -223,7 +211,6 @@ ohmyzshPluginInstall
 pl9kInstall
 pl10kInstall
 tmuxTpmInstall
-fubectlInstall
 
 #vim setup
 vundleInstall
