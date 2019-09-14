@@ -1,6 +1,4 @@
-#!/bin/sh
-
-source $HOME/.dotfiles/script/prompt
+source $DOTFILES/script/prompt
 
 setup_gitconfig() {
 
