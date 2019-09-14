@@ -55,7 +55,7 @@ else
   clone
   export DOTFILES=$dotfiles;
   wait
-  $DOTFILES/script/bootstrap
+  sudo $DOTFILES/script/bootstrap
 fi
 
 clone() {
