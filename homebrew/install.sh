@@ -41,12 +41,12 @@ success 'Tapped into all 3rd party taps!'
 
 info 'Installing formulea'
 brewfile="$brewdir/Brewfile"
-brew install $(cat Brewfile|grep -v "#")
+brew install $(cat $brewfile|grep -v "#")
 success 'Installed all formulea!'
 
 info 'Installing Casks'
 caskfile="$brewdir/Caskfile"
-brew cask install $(cat Caskfile|grep -v "#")
+brew cask install $(cat $caskfile|grep -v "#")
 success 'Installed all casks!'
 
 
