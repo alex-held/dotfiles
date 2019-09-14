@@ -38,16 +38,8 @@ displayUsageAndExit() {
 # 	shift
 # done
 
-echo $DOTFILES
-echo $DOTFILES
-echo $DOTFILES
-echo $DOTFILES
-echo $DOTFILES
-
-#export DOTFILES=$HOME/.dotfiles
-
 # Init git
-$DOTFILES/homebrew/git/install.sh
+$DOTFILES/git/install.sh
 
 # Set macOS defaults
 $DOTFILES/macos/set-defaults.sh

@@ -1,5 +1,25 @@
 #!/bin/sh
 
+echo 'ZSH INSTALL'
+echo 'ZSH INSTALL'
+echo 'ZSH INSTALL'
+echo 'ZSH INSTALL'
+echo 'ZSH INSTALL'
+echo 'ZSH INSTALL'
+echo 'ZSH INSTALL'
+echo 'ZSH INSTALL'
+echo 'ZSH INSTALL'
+echo 'ZSH INSTALL'
+echo 'ZSH INSTALL'
+echo 'ZSH INSTALL'
+echo 'ZSH INSTALL'
+echo 'ZSH INSTALL'
+echo 'ZSH INSTALL'
+echo 'ZSH INSTALL'
+echo 'ZSH INSTALL'
+echo 'ZSH INSTALL'
+echo 'ZSH INSTALL'
+
 zshInstall () {
     # zsh install
     # todo add in check for macOS 10.15 since zsh is default
