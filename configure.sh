@@ -110,14 +110,14 @@ bootstrapBrew() {
 
 init() {
     [ -z "$DOTFILES" ] && echo "Empty" || echo "Not empty"
-    if test ! -d "$HOME/.dotfiles"; then
-        firstInstall
-    else
-        info "Changing directory into $DOTFILES"
-        pwd
-        cd $DOTFILES
-        pwd
-    fi
+    # if test ! -d "$HOME/.dotfiles"; then
+    #     firstInstall
+    # else
+    #     info "Changing directory into $DOTFILES"
+    #     pwd
+    #     cd $DOTFILES
+    #     pwd
+    # fi
 }
 
 init
