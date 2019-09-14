@@ -20,6 +20,28 @@ fail () {
   exit
 }
 
+setup_gitconfig () {
+  if ! [ -f git/gitconfig.local.symlink ]
+  then
+    info 'setup gitconfig'
+
+    git_credential='cache'
+    if [ "$(uname -s)" == "Darwin" ]
+    then
+      git_credential='osxkeychain'
+    fi
+
+    user ' - What is your github author name?'
+    read -e git_authorname
+    user ' - What is your github author email?'
+    read -e git_authoremail
+
+    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
+
+    success 'gitconfig'
+  fi
+}
+
 clone() {
 
   if test ! $(which git); then
@@ -34,27 +56,6 @@ clone() {
   if ! (git clone --quiet https://github.com/alex-held/dotfiles.git $dotfiles) then
       echo "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $dotfiles." 
       exit 1
-  fi
-
-  cd $dotfiles
-  if ! [ -f git/gitconfig.local.symlink ]
-  then
-    info 'Setting up gitconfig'
-
-    git_credential='cache'
-    if [ "$(uname -s)" == "Darwin" ]
-    then
-      git_credential='osxkeychain'
-    fi
-
-    user ' - What is your git author name?'
-    read -e git_authorname
-    user ' - What is your git author email?'
-    read -e git_authoremail
-
-    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
-
-    success 'gitconfig'
   fi
 }
 
@@ -77,7 +78,6 @@ if test ! $(which brew)
       success 'brew installed'
     fi
   else
-    
     info 'brew is already installed'
 fi
 
