@@ -49,12 +49,10 @@ info "Bootstrapping alexheld's dotfiles (https://github.com/alex-held/dotfiles).
 dotfiles="$HOME/.dotfiles"
 
 if [ -d $dotfiles ]; then
-  export DOTFILES=$dotfiles;
-  sudo $dotfiles/script/bootstrap
+  sudo $dotfiles/script/bootstrap $dotfiles
 else
   clone
-  export DOTFILES=$dotfiles;
-  sudo $dotfiles/script/bootstrap
+  sudo $dotfiles/script/bootstrap $dotfiles
 fi
 
 clone() {
