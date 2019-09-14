@@ -20,11 +20,27 @@ fail () {
   exit
 }
 
-function cinfo() {
-	COLOR='\033[01;33m'	# bold yellow
-	RESET='\033[00;00m'	# normal white
-	MESSAGE=${@:-"${RESET}Error: No message passed"}
-	echo -e "${COLOR}${MESSAGE}${RESET}"
+ohmyzshInstall () {
+    # oh-my-zsh install
+    if [ -d ~/.oh-my-zsh/ ] ; then
+    info 'oh-my-zsh is already installed...'
+    read -p "Would you like to update oh-my-zsh now? y/n " -n 1 -r
+    echo ''
+        if [[ $REPLY =~ ^[Yy]$ ]] ; then
+        cd ~/.oh-my-zsh && git pull
+            if [[ $? -eq 0 ]]
+            then
+                success "Update complete..." && cd
+            else
+                fail "Update not complete..." >&2 cd
+            fi
+        fi
+    else
+    echo "oh-my-zsh not found, now installing oh-my-zsh..."
+    echo ''
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
+    success 'oh-my-zsh installed'
+    fi
 }
 
 clone() {
@@ -70,6 +86,8 @@ fi
 
 info "Bootstrapping alexheld's dotfiles (https://github.com/alex-held/dotfiles)."
 dotfiles="$HOME/.dotfiles"
+
+ohmyzshInstall
 
 if [ -d $dotfiles ]; then
   $dotfiles/script/bootstrap $dotfiles
