@@ -4,11 +4,16 @@
 
 set -e
 
-pwd | echo
-cd "$(dirname $0)"/..
-pwd | echo
+echo $(pwd -P)
+
+
+#cd "$(dirname $0)"/..
 cd "$DOTFILES"
-pwd | echo
+
+
+echo "$(dirname $0)/.."
+echo "$DOTFILES"
+
 
 
 # Run Homebrew through the Brewfile
