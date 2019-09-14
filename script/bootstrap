@@ -47,6 +47,7 @@ cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd -P)
 
 export DOTFILES=$DOTFILES_ROOT
+export ZSH=$DOTFILES_ROOT
 
 set -e
 
