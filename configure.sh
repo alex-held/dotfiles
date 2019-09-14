@@ -20,6 +20,13 @@ fail () {
   exit
 }
 
+function cinfo() {
+	COLOR='\033[01;33m'	# bold yellow
+	RESET='\033[00;00m'	# normal white
+	MESSAGE=${@:-"${RESET}Error: No message passed"}
+	echo -e "${COLOR}${MESSAGE}${RESET}"
+}
+
 clone() {
 
   if test ! $(which git); then

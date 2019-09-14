@@ -21,24 +21,6 @@ displayUsageAndExit() {
 	exit
 }
 
-# while test $# -gt 0; do
-# 	case "$1" in
-# 		"-h"|"--help")
-# 			displayUsageAndExit
-# 			;;
-# 		"-e"|"--edit")
-# 			exec "$EDITOR" "$dotfilesDirectory"
-# 			exit
-# 			;;
-# 		*)
-# 			echo "Invalid option: $1"
-# 			displayUsageAndExit
-# 			;;
-# 	esac
-# 	shift
-# done
-
-
 # Set macOS defaults
 sh $DOTFILES/macos/set-defaults.sh
 
