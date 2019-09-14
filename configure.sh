@@ -21,6 +21,7 @@ fail () {
 }
 #source ./script/prompt
 
+
 brewInstall () {
     # Install brew
     if test ! $(which brew); then
@@ -37,12 +38,80 @@ brewInstall () {
     else
         info 'brew is already installed'
     fi
-}
 
-brewUpdate () {
     brew update
     success 'brew updated'
 }
+
+
+init() {
+    info "Bootstrapping alexheld's dotfiles (https://github.com/alex-held/dotfiles)."
+    if [ -d $HOME/.dotfiles ];
+    then
+        fail "Cannot bootstrap dotfiles, because there is already a directory at $HOME/.dotfiles. Please delete it and try again."
+        exit 1;
+    else
+        export DOTFILES=$HOME/.dotfiles 
+        success "Setup DOTFILES environment variable for $DOTFILES"
+
+        brewInstall
+
+        if test ! $(which git); 
+        then
+            info 'git is not installed. -> installing git'
+            brew install git
+            success 'installed git'
+        else
+            info 'git is already installed.'
+        fi
+
+        info 'Cloning alex-held dotfiles repository into ~/.dotfiles'
+        git clone https://github.com/alex-held/dotfiles $HOME/.dotfiles
+
+        info "Changing directory into $DOTFILES"
+        pwd
+        cd $DOTFILES
+        pwd
+    fi
+}
+
+installTaps () {
+    export DOTBREW=$DOTFILES/homebrew
+    info 'Setting up Taps'
+    while read in; do brew tap "$in"; done < $DOTBREW/Tap
+    success 'Tapped into all 3rd party taps!'
+}
+
+installBrews () {
+    info 'Installing formulea'
+    brewfile="$DOTBREW/Brewfile"
+    cat $brewfile | grep -v "#"
+    brew install $(cat $brewfile | grep -v "#")
+    success 'Installed all formulea!'
+}
+
+installCasks () {
+    info 'Installing Casks'
+    caskfile="$DOTBREW/Caskfile"
+    cat $caskfile | grep -v "#"
+    brew cask install $(cat $caskfile | grep -v "#")
+    success 'Installed all casks!'
+}
+
+bootstrapBrew() {
+    installTaps
+    installBrews
+    installCasks
+}
+
+
+init
+bootstrapBrew
+
+exit 0;
+
+
+
 
 brewBundle() {
     info "Bundling brewfile..."
@@ -238,10 +307,10 @@ setting_Defaults() {
 
 
 # brew setup
-brewInstall
-brewUpdate
+#brewInstall
+#brewUpdate
 #brewUpgrade
-brewBundle
+#brewBundle
 
 # zsh setup
 zshInstall

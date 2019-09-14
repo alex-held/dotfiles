@@ -1,0 +1,26 @@
+# Terminal
+zsh
+zsh-completions
+zsh-syntax-highlighting
+bash-completion
+tmux
+tmate
+
+## Productive stuff
+ack
+wget
+watch
+coreutils
+unrar
+
+## Programming stuff
+rbenv
+ruby-build
+nvm
+npm
+python
+python@2
+python3
+node
+git
+yarn

@@ -1,4 +1,3 @@
-tap 'homebrew/cask'
 cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
@@ -24,3 +23,10 @@ brew 'yarn'
 cask 'iterm2-beta'
 cask 'visual-studio-code'
 
+#cask 'dotnet-sdk-preview'
+#cask '1password-beta'
+#cask 'alfred2'
+#cask 'microsoft-teams'
+#cask 'nordvpn'
+#cask 'firefox'
+#cask 'mongodb'

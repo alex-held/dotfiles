@@ -18,7 +18,17 @@ then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
   fi
   
-  brew bundle --file=~/.dotfiles/Brewfile
+  # install brew taps, needs to be fixed properly later
+  while read in; do brew tap "$in"; done < Taps
+
+  # Install brews
+  brew install $(cat Brewfile|grep -v "#")
+
+  # Install casks
+  brew cask install $(cat Caskfile|grep -v "#")
+  
+
+  #brew bundle --file=~/.dotfiles/Brewfile
 fi
 
 exit 0
