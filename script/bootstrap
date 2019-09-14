@@ -29,8 +29,7 @@ set -e
 
 
 success 'Starting to installing your Badass macOS terminal!!' 
-export DOTFILES="$1"
-
+success "DOTFILES environment set: $DOTFILES"
 
 link_file() {
 
