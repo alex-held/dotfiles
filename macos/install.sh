@@ -9,7 +9,7 @@ if test ! "$(uname)" = "Darwin"
 # yeah, let's do that.  
 
 echo "setting mac defaults"
-set-defaults.sh
+#set-defaults.sh
 
 #echo "› sudo softwareupdate -i -a" 
 #sudo softwareupdate -i -a

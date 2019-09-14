@@ -4,7 +4,12 @@
 
 set -e
 
+pwd | echo
 cd "$(dirname $0)"/..
+pwd | echo
+cd "$DOTFILES"
+pwd | echo
+
 
 # Run Homebrew through the Brewfile
 #echo "› brew bundle"
