@@ -11,5 +11,5 @@ if test ! "$(uname)" = "Darwin"
 echo "setting mac defaults"
 sh ./set-defaults.sh
 
-echo "› sudo softwareupdate -i -a" 
-sudo softwareupdate -i -a
+#echo "› sudo softwareupdate -i -a" 
+#sudo softwareupdate -i -a

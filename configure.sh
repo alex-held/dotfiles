@@ -53,7 +53,7 @@ if [ -d $dotfiles ]; then
 
     if [[ $REPLY =~ ^[Nn]$ ]]; then 
         echo "deleting directory $dotfiles"
-        rm -rdf $dotfiles
+        rm -rdf $dotfiles > dev/null
     else
         fail "Cannot clone alex-held's dotfiles, because there is already a directory at $dotfiles. Please delete it and try again."
         exit 1;
@@ -71,7 +71,7 @@ else
 
     info "Cloning alex-held dotfiles repository into $dotfiles"
     if ! (git clone --quiet https://github.com/alex-held/dotfiles.git $dotfiles) then
-        echo "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $dotfiles ." 
+        echo "Sorry i could not clone https://github.com/alex-held/dotfiles.git into $dotfiles." 
         exit 1
     else
         export DOTFILES=$dotfiles;
