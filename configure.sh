@@ -46,20 +46,17 @@ fi
 
 
 info "Bootstrapping alexheld's dotfiles (https://github.com/alex-held/dotfiles)."
-if [ -d "$HOME/.dotfiles" ];
-then
-
+if [ -d "$HOME/.dotfiles" ]; then
     read -p "There is already a directory at $($HOME/.dotfiles). Do you want me to override it? y/n" -n 1 -r
 
-    if [[ $REPLY =~ ^[Nn]$ ]]; 
-    then 
+    if [[ $REPLY =~ ^[Nn]$ ]]; then 
         rm -rdf "$HOME/.dotfiles"
     else
         fail "Cannot clone alex-held's dotfiles, because there is already a directory at $HOME/.dotfiles. Please delete it and try again."
         exit 1;
     fi
 else
-    dotfiles="$HOME/.dotfiles"
+    local dotfiles="$HOME/.dotfiles"
     
     if test ! $(which git); 
     then
