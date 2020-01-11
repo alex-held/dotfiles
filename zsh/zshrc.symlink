@@ -8,25 +8,52 @@ fi
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.dotnet/tools:$PATH
+export DOTFILES=~/.dotfiles
 
 
-# Path to your oh-my-zsh installation.
-export ZSH="/Users/dev/.oh-my-zsh"
+########################
+# Antigen
+########################
+source /usr/local/share/antigen/antigen.zsh
+source ~/.theme
+source $DOTFILES/zsh/.aliases
+source $DOTFILES/zsh/.zshopt.zsh
+source $DOTFILES/zsh/.secrets.zsh
+source $DOTFILES/zsh/.keybindings.zsh
+source $DOTFILES/zsh/.completion.zsh
 
-## 
-# Style
-# ----------------------------
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
-ZSH_COLORIZE_STYLE="colorful"
 
-## 
-# Plugins
-# ----------------------------
+source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+PROMPT='$(kube_ps1)'$PROMPT
 
-plugins=(
-  
-    git 
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+antigen bundles <<EOBUNDLES
+
+    StackExchange/blackbox
+    ng
+    brew
+    cask
+    node
+    yarn
+    command-not-found
+    colored-man-pages
+    rsync
+    pip
+    cp
+    sudo
+    httpie
+    history
+    tmux
+    colorize
+    npm
+    nvm
+    python
+    
+    git
     git-flow 
     git-flow-avh 
     git-hubflow 
@@ -37,6 +64,11 @@ plugins=(
     git-flow-completion
     gitignore
 
+    zsh-users/zsh-completions
+    zsh-users/zsh-autosuggestions
+    zsh-users/zsh-syntax-highlighting
+    agkozak/zsh-z
+
     vscode
     dotnet
 
@@ -46,156 +78,30 @@ plugins=(
     kubectl
     kubetail
     minikube
+    alexrochas/zsh-extract
+    alexrochas/zsh-zkubectl
+    alexrochas/zsh-git-changes
 
-    #gradle
-    #gradle-completion
-   
-   
-   # sbt
-#   terraform
-
-    ng
-    brew
-    cask
-    node
-    npm
-    yarn
-    
-    zsh-syntax-highlighting
-    zsh-completions
-    zsh-autosuggestions
-    zsh-z
-
-    # vagrant
-    # vagrant-prompt
-
-    #  vundle
-    # autoenv
-    colorize
-    common-aliases
-    rsync
-    cp
-    sudo
-    httpie
-    history
-    tmux
-    )
+EOBUNDLES
 
 
-source $ZSH/oh-my-zsh.sh
+# Load the theme.
+antigen theme bhilburn/powerlevel9k powerlevel9k
 
+# Tell Antigen that you're done.
+antigen apply
 
-## 
-# Aliases
-# ----------------------------
-
-source ~/.aliases/general.zsh
-
-# Config
-alias zshconfig="code ~/.zshrc"
-alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Directories
-alias cdd='cd ~/source/repos'
-alias cd-settings='cd ~/source/settings'
-alias cd-script='cd ~/source/script'
-alias cd-ax='cd /Users/dev/source/repos/Gateway.Ax40.Services'
-alias cdmock='/Users/dev/source/repos/NinjaTools.FluentMockServer'
-
-# Git
-alias gs='git status'
-alias gl='git log --oneline'
-alias gf='git fetch --all'
-
-alias gcm='git checkout master'
-alias gbm='git rebase master'
-
-##
-# Environment Variables
-# ----------------------------
-
-export IGUS_PAT="ksfc7hzjcf45iqbxdflp63r6ufjzmk4hzubyudryybu3n4kmlngq"
-
-    
-## 
-# Completions
-# ----------------------------
-
-fpath=(/usr/local/share/zsh-completions $fpath)
-eval "$(rbenv init -)"
-source $(dirname $(gem which colorls))/tab_complete.sh
-source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-#source $ZSH_CUSTOM/themes/spaceship-prompt
-# must be last
-
-source <(kubectl completion zsh)
-source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $HOME/.functions
-source $HOME/.aliases
-
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=253'
-typeset -A ZSH_HIGHLIGHT_STYLES=(comment fg=96)
-
-# HIGHLIGHT 
-# ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-
-# #styles
-# ZSH_HIGHLIGHT_STYLES[default]=none
-# # ZSH_HIGHLIGHT_STYLES[function]=fg=magenta,bold
-# ZSH_HIGHLIGHT_STYLES[command]=fg=green
-# ZSH_HIGHLIGHT_STYLES[precommand]=fg=green
-# ZSH_HIGHLIGHT_STYLES[alias]=fg=green
-# ZSH_HIGHLIGHT_STYLES[builtin]=fg=green
-# #path
-# ZSH_HIGHLIGHT_STYLES[path]=fg=cyan,underline
-# ZSH_HIGHLIGHT_STYLES[path_prefix]=fg=cyan
-# ZSH_HIGHLIGHT_STYLES[path_approx]=fg=cyan
-# # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=240
-# ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red') # To have commands starting with `rm -rf` in red:
-
-ZSH_HIGHLIGHT_MAXLENGTH=1024
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-
-ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=50
-ZSH_AUTOSUGGEST_USE_ASYNC=true
-
-autoload -U compinit && compinit
-  
-
-# keybinds
-bindkey '^[[1;4A' history-substring-search-up
-bindkey '^[[1;4B' history-substring-search-down
-
-# ZSH OPTIONS
-emulate zsh
-setopt ALWAYS_TO_END           # full completions move cursor to the end
-setopt AUTO_CD                 # `dirname` is equivalent to `cd dirname`
-setopt AUTO_LIST               # automatically list choices on ambiguous completion
-setopt AUTO_MENU               # show completion menu on a successive tab press
-setopt AUTO_PARAM_SLASH        # if completed parameter is a directory, add a trailing slash
-setopt AUTO_PUSHD              # `cd` pushes directories to the directory stack
-setopt COMPLETE_IN_WORD        # complete from the cursor rather than from the end of the word
-setopt EXTENDED_GLOB           # (#qx) glob qualifier and more
-setopt EXTENDED_HISTORY        # write timestamps to history
-setopt GLOB_DOTS               # glob matches files starting with dot; `*` becomes `*(D)`
-setopt HIST_EXPIRE_DUPS_FIRST  # if history needs to be trimmed, evict dups first
-setopt HIST_FIND_NO_DUPS       # don't show dups when searching history
-setopt HIST_IGNORE_DUPS        # don't add dups to history
-setopt HIST_IGNORE_SPACE       # don't add commands starting with space to history
-setopt HIST_VERIFY             # if a command triggers history expansion, show it instead of running
-setopt INTERACTIVE_COMMENTS    # allow comments in command line
-setopt MULTIOS                 # allow multiple redirections for the same fd
-setopt NO_BANG_HIST            # disable old history syntax
-setopt NO_BG_NICE              # don't nice background jobs; not useful and doesn't work on WSL
-setopt NO_FLOW_CONTROL         # disable start/stop characters in shell editor
-setopt NO_MENU_COMPLETE        # do not autoselect the first completion entry
-setopt PATH_DIRS               # perform path search even on command names with slashes
-setopt SHARE_HISTORY           # write and import history on every command
-setopt C_BASES                 # print hex/oct numbers as 0xFF/077 instead of 16#FF/8#77
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# fpath=($fpath "/home/dev/.zfunctions")
+
+
+##############################
+#### DISABLED ######
+##############################
+
+# https://github.com/alexrochas/zsh-vim-crtl-z
+# zle -N fancy-ctrl-z
+# bindkey '^Z' fancy-ctrl-z
+# antigen bundle alexrochas/zsh-vim-crtl-z
