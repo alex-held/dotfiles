@@ -1,0 +1,38 @@
+[
+  {
+    "cloudName": "AzureCloud",
+    "id": "68ac0048-05fa-4f0f-839b-e0163a6274c3",
+    "isDefault": true,
+    "name": "Visual Studio Professional",
+    "state": "Enabled",
+    "tenantId": "191a11ec-eb7e-4154-bd5a-863f61f66401",
+    "user": {
+      "name": "aheld@igus.net",
+      "type": "user"
+    }
+  },
+  {
+    "cloudName": "AzureCloud",
+    "id": "00c49599-7b00-40f9-b862-7e35391f7ced",
+    "isDefault": false,
+    "name": "Nutzungsbasierte Bezahlung",
+    "state": "Enabled",
+    "tenantId": "0cd0a380-e461-4945-83a5-7dbc04038a36",
+    "user": {
+      "name": "aheld@igus.net",
+      "type": "user"
+    }
+  },
+  {
+    "cloudName": "AzureCloud",
+    "id": "3eb69c24-38ae-4f25-be7b-2dc5a00dc6d3",
+    "isDefault": false,
+    "name": "igus IT iERP",
+    "state": "Enabled",
+    "tenantId": "0cd0a380-e461-4945-83a5-7dbc04038a36",
+    "user": {
+      "name": "aheld@igus.net",
+      "type": "user"
+    }
+  }
+]

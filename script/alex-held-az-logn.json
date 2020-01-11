@@ -1,0 +1,38 @@
+[
+  {
+    "cloudName": "AzureCloud",
+    "id": "009cdd3e-4e4b-43fd-ab37-682911440d25",
+    "isDefault": false,
+    "name": "Free Trial",
+    "state": "Enabled",
+    "tenantId": "b1469fb6-4df3-4d65-8a6a-b867df9450ad",
+    "user"ls: {
+      "name": "git@alexanderheld.net",
+      "type": "user"
+    }
+  },
+  {
+    "cloudName": "AzureCloud",
+    "id": "a1a22755-b28a-4bcc-ad57-02b7748f7996",
+    "isDefault": false,
+    "name": "Pay-As-You-Go",
+    "state": "Enabled",
+    "tenantId": "b1469fb6-4df3-4d65-8a6a-b867df9450ad",
+    "user": {
+      "name": "git@alexanderheld.net",
+      "type": "user"
+    }
+  },
+  {
+    "cloudName": "AzureCloud",
+    "id": "573bf55a-fbf3-4ef8-a95f-5e629adef4d8",
+    "isDefault": true,
+    "name": "AsINeed",
+    "state": "Enabled",
+    "tenantId": "b1469fb6-4df3-4d65-8a6a-b867df9450ad",
+    "user": {
+      "name": "git@alexanderheld.net",
+      "type": "user"
+    }
+  }
+]
