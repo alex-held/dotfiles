@@ -1,158 +1,201 @@
-# Path to your oh-my-zsh installation oh-my-zsh specific settings
-export ZSH=~/.oh-my-zsh
-export TERM=xterm-256color
-source $ZSH/oh-my-zsh.sh
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-# ZSH Customization Settings
-#ZSH_THEME="powerlevel10k/powerlevel10k"
-ZSH_THEME="spaceship"
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.dotnet/tools:$PATH
 
-# fix pasting speed
-# ref https://github.com/zsh-users/zsh-autosuggestions/issues/238
-zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
-# zsh tmux settings
-#ZSH_TMUX_AUTOSTART='true'
-#ZSH_TMUX_AUTOCONNECT='false' # do not autoconnect to existing tmux session, allows a new term new tmux session
+# Path to your oh-my-zsh installation.
+export ZSH="/Users/dev/.oh-my-zsh"
 
-# #Background Jobs Function
-# set_default POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE true
-# prompt_background_jobs() {
-# local background_jobs_number=${$(jobs -l | wc -l)// /}
-# local wrong_lines=`jobs -l | awk '/pwd now/{ count++ } END {print count}'`
-# if [[ wrong_lines -gt 0 ]]; then
-#      background_jobs_number=$(( $background_jobs_number - $wrong_lines ))
-#   fi
-#   if [[ background_jobs_number -gt 0 ]]; then
-#     local background_jobs_number_print="1"
-#     if [[ "$POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE" == "true" ]] && [[ "$background_jobs_number" -gt 1 ]]; then
-#       background_jobs_number_print="$background_jobs_number"
-#     fi
-#     "$1_prompt_segment" "$0" "$2" "$DEFAULT_COLOR" "cyan" "$background_jobs_number_print" 'BACKGROUND_JOBS_ICON'
-#   fi
-# }
-
-# Refresh Function - https://babushk.in/posts/renew-environment-tmux.html
-# if [ -n "$TMUX" ]; then                                                                               
-#   function refresh {                                                                                
-#     export $(tmux show-environment | grep "^SSH_AUTH_SOCK")                                       
-#     export $(tmux show-environment | grep "^DISPLAY")                                               
-#   }                                                                                                 
-# else                                                                                                  
-#   function refresh { }                                                                              
-# fi
-
-# POWERLEVEL9K_TIME_FORMAT="%D{%T | %m.%d.%y}"
 ## 
+# Style
+# ----------------------------
 
-# Default username to hide "user@hostname" info
-DEFAULT_USER="$(whoami)"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_COLORIZE_STYLE="colorful"
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
+## 
+# Plugins
+# ----------------------------
 
 plugins=(
-    sudo 
+  
     git 
+    git-flow 
+    git-flow-avh 
+    git-hubflow 
+    git-prompt 
+    git-remote-branch 
+    gitfast 
+    github
+    git-flow-completion
+    gitignore
+
+    vscode
+    dotnet
+
+    docker
+    docker-compose
+    docker-machine
+    kubectl
+    kubetail
+    minikube
+
+    #gradle
+    #gradle-completion
+   
+   
+   # sbt
+#   terraform
+
+    ng
+    brew
+    cask
     node
     npm
-    rsync
-    docker
-    history 
-    tmux 
-    tmuxinator
-    zsh-autosuggestions
+    yarn
+    
+    zsh-syntax-highlighting
     zsh-completions
-    zsh-z)
+    zsh-autosuggestions
+    zsh-z
+
+    # vagrant
+    # vagrant-prompt
+
+    #  vundle
+    # autoenv
+    colorize
+    common-aliases
+    rsync
+    cp
+    sudo
+    httpie
+    history
+    tmux
+    )
 
 
 source $ZSH/oh-my-zsh.sh
 
-# Zsh-Completions
+
+## 
+# Aliases
+# ----------------------------
+
+source ~/.aliases/general.zsh
+
+# Config
+alias zshconfig="code ~/.zshrc"
+alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Directories
+alias cdd='cd ~/source/repos'
+alias cd-settings='cd ~/source/settings'
+alias cd-script='cd ~/source/script'
+alias cd-ax='cd /Users/dev/source/repos/Gateway.Ax40.Services'
+alias cdmock='/Users/dev/source/repos/NinjaTools.FluentMockServer'
+
+# Git
+alias gs='git status'
+alias gl='git log --oneline'
+alias gf='git fetch --all'
+
+alias gcm='git checkout master'
+alias gbm='git rebase master'
+
+##
+# Environment Variables
+# ----------------------------
+
+export IGUS_PAT="ksfc7hzjcf45iqbxdflp63r6ufjzmk4hzubyudryybu3n4kmlngq"
+
+    
+## 
+# Completions
+# ----------------------------
+
 fpath=(/usr/local/share/zsh-completions $fpath)
-
-# User configuration
-
-export MANPATH="/usr/local/man:$MANPATH"
-
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-#---- CUSTOM ----
-#Powerlevel9k/Powerlevel10k settings
-# https://github.com/bhilburn/powerlevel9k/wiki/Show-Off-Your-Config#p9kgt
-
-source $ZSH/oh-my-zsh.sh
+eval "$(rbenv init -)"
+source $(dirname $(gem which colorls))/tab_complete.sh
 source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+#source $ZSH_CUSTOM/themes/spaceship-prompt
+# must be last
+
+source <(kubectl completion zsh)
 source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-#source $HOME/.p9kgt
 source $HOME/.functions
 source $HOME/.aliases
 
-# autoload ----------------------------------------------------------------------
-autoload -Uz vcs_info 
-autoload -Uz colors && colors
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=253'
+typeset -A ZSH_HIGHLIGHT_STYLES=(comment fg=96)
+
+# HIGHLIGHT 
+# ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+
+# #styles
+# ZSH_HIGHLIGHT_STYLES[default]=none
+# # ZSH_HIGHLIGHT_STYLES[function]=fg=magenta,bold
+# ZSH_HIGHLIGHT_STYLES[command]=fg=green
+# ZSH_HIGHLIGHT_STYLES[precommand]=fg=green
+# ZSH_HIGHLIGHT_STYLES[alias]=fg=green
+# ZSH_HIGHLIGHT_STYLES[builtin]=fg=green
+# #path
+# ZSH_HIGHLIGHT_STYLES[path]=fg=cyan,underline
+# ZSH_HIGHLIGHT_STYLES[path_prefix]=fg=cyan
+# ZSH_HIGHLIGHT_STYLES[path_approx]=fg=cyan
+# # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=240
+# ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red') # To have commands starting with `rm -rf` in red:
+
+ZSH_HIGHLIGHT_MAXLENGTH=1024
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=50
+ZSH_AUTOSUGGEST_USE_ASYNC=true
+
 autoload -U compinit && compinit
+  
 
-# syntax highlighting
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+# keybinds
+bindkey '^[[1;4A' history-substring-search-up
+bindkey '^[[1;4B' history-substring-search-down
 
-#styles
-ZSH_HIGHLIGHT_STYLES[default]=none
-# ZSH_HIGHLIGHT_STYLES[function]=fg=magenta,bold
-ZSH_HIGHLIGHT_STYLES[command]=fg=green
-ZSH_HIGHLIGHT_STYLES[precommand]=fg=green
-ZSH_HIGHLIGHT_STYLES[alias]=fg=green
-ZSH_HIGHLIGHT_STYLES[builtin]=fg=green
-#path
-ZSH_HIGHLIGHT_STYLES[path]=fg=cyan,underline
-ZSH_HIGHLIGHT_STYLES[path_prefix]=fg=cyan
-ZSH_HIGHLIGHT_STYLES[path_approx]=fg=cyan
-# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=240
+# ZSH OPTIONS
+emulate zsh
+setopt ALWAYS_TO_END           # full completions move cursor to the end
+setopt AUTO_CD                 # `dirname` is equivalent to `cd dirname`
+setopt AUTO_LIST               # automatically list choices on ambiguous completion
+setopt AUTO_MENU               # show completion menu on a successive tab press
+setopt AUTO_PARAM_SLASH        # if completed parameter is a directory, add a trailing slash
+setopt AUTO_PUSHD              # `cd` pushes directories to the directory stack
+setopt COMPLETE_IN_WORD        # complete from the cursor rather than from the end of the word
+setopt EXTENDED_GLOB           # (#qx) glob qualifier and more
+setopt EXTENDED_HISTORY        # write timestamps to history
+setopt GLOB_DOTS               # glob matches files starting with dot; `*` becomes `*(D)`
+setopt HIST_EXPIRE_DUPS_FIRST  # if history needs to be trimmed, evict dups first
+setopt HIST_FIND_NO_DUPS       # don't show dups when searching history
+setopt HIST_IGNORE_DUPS        # don't add dups to history
+setopt HIST_IGNORE_SPACE       # don't add commands starting with space to history
+setopt HIST_VERIFY             # if a command triggers history expansion, show it instead of running
+setopt INTERACTIVE_COMMENTS    # allow comments in command line
+setopt MULTIOS                 # allow multiple redirections for the same fd
+setopt NO_BANG_HIST            # disable old history syntax
+setopt NO_BG_NICE              # don't nice background jobs; not useful and doesn't work on WSL
+setopt NO_FLOW_CONTROL         # disable start/stop characters in shell editor
+setopt NO_MENU_COMPLETE        # do not autoselect the first completion entry
+setopt PATH_DIRS               # perform path search even on command names with slashes
+setopt SHARE_HISTORY           # write and import history on every command
+setopt C_BASES                 # print hex/oct numbers as 0xFF/077 instead of 16#FF/8#77
 
-# patterns
-ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red') # To have commands starting with `rm -rf` in red:
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-#---- Export ----
-export PATH=$PATH:/Users/dev/bin
-export PATH=$GOPATH/bin:$PATH
-export PATH=$PATH:/usr/local/bin/node
-export PATH="/usr/local/opt/node@8/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-export MONGO_PATH=/usr/local/mongodb 
-export PATH=$PATH:$MONGO_PATH/bin
-#---- End Export ----
-
-
-#---- Source ----
-#[ -f ~/bin/fubectl.source ] && source ~/bin/fubectl.source
-#source <(kubectl completion zsh)
-source $(dirname $(gem which colorls))/tab_complete.sh
-#---- End Source ----
-#---- END CUSTOM ----
-
-source /home/dev/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
-source /home/dev/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 
-fpath=($fpath "/home/dev/.zfunctions")
-
-  # Set Spaceship ZSH as a prompt
-  autoload -U promptinit; promptinit
-  prompt spaceship
+# fpath=($fpath "/home/dev/.zfunctions")
