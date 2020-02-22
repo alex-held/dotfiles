@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "Decrypting file '$1' -> '$2'"
+gpg --decrypt $1 > $2
+

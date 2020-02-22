@@ -2,6 +2,7 @@
 
 export PATH="/usr/bin:$PATH"
 export PATH="/bin:$PATH"
+export PATH="$DOTFILES/bin:$PATH"
 export PATH="$HOME/source/script/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"

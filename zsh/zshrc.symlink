@@ -1,16 +1,6 @@
 #!/bin/sh
 
 export DOTFILES=~/.dotfiles
-
-#export LDFLAGS="-L/usr/local/opt/qt/lib"
-#export LDFLAGS="-L/usr/local/opt/sqlite/lib"
-#export PKG_CONFIG_PATH="/usr/local/opt/sqlite/lib/pkgconfig"
-
-#export CPPFLAGS="-I/usr/local/opt/qt/include"
-# export CPPFLAGS="-I/usr/local/opt/openjdk/include"
-#export CPPFLAGS="-I/usr/local/opt/sqlite/include"
-#export PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig"
-
 export EDITOR='code'
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export MONO_GAC_PREFIX="/usr/local"
@@ -30,7 +20,6 @@ source "/usr/local/share/antigen/antigen.zsh"
 source "$DOTFILES/zsh/PATH.zsh"
 source "$DOTFILES/zsh/aliases.zsh"
 source "$DOTFILES/zsh/zshopt.zsh"
-source "$DOTFILES/zsh/gp-lock.zsh"
 source "$DOTFILES/zsh/keybindings.zsh"
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
