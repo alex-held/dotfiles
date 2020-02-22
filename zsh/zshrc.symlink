@@ -1,39 +1,46 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+#!/bin/sh
 
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$HOME/.dotnet/tools:$PATH
 export DOTFILES=~/.dotfiles
 
+#export LDFLAGS="-L/usr/local/opt/qt/lib"
+#export LDFLAGS="-L/usr/local/opt/sqlite/lib"
+#export PKG_CONFIG_PATH="/usr/local/opt/sqlite/lib/pkgconfig"
+
+#export CPPFLAGS="-I/usr/local/opt/qt/include"
+# export CPPFLAGS="-I/usr/local/opt/openjdk/include"
+#export CPPFLAGS="-I/usr/local/opt/sqlite/include"
+#export PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig"
+
+export EDITOR='code'
+export GROOVY_HOME=/usr/local/opt/groovy/libexec
+export MONO_GAC_PREFIX="/usr/local"
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+export KUBEPATH="$HOME/.kube"
+export KUBE_CERTPATH="$KUBEPATH/certs"
+export KUBECONFIG="$KUBEPATH/kubeconfig"
+export MINIKUBE_HOME="$HOME/.minikube"
+export MINIKUBE_CONFIG="$MINIKUBE_HOME/kubeconfig"
+export STARSHIP_CONFIG=~/.config/starship.toml
 
 ########################
 # Antigen
 ########################
-source /usr/local/share/antigen/antigen.zsh
-source ~/.theme
-source $DOTFILES/zsh/.aliases
-source $DOTFILES/zsh/.zshopt.zsh
-source $DOTFILES/zsh/.secrets.zsh
-source $DOTFILES/zsh/.keybindings.zsh
-source $DOTFILES/zsh/.completion.zsh
 
-
-
-source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
-PROMPT='$(kube_ps1)'$PROMPT
-
+source "/usr/local/share/antigen/antigen.zsh"
+source "$DOTFILES/zsh/PATH.zsh"
+source "$DOTFILES/zsh/aliases.zsh"
+source "$DOTFILES/zsh/zshopt.zsh"
+source "$DOTFILES/zsh/gp-lock.zsh"
+source "$DOTFILES/zsh/keybindings.zsh"
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
 
+# sindresorhus/pure
 antigen bundles <<EOBUNDLES
 
-    StackExchange/blackbox
     ng
     brew
     cask
@@ -66,7 +73,6 @@ antigen bundles <<EOBUNDLES
 
     zsh-users/zsh-completions
     zsh-users/zsh-autosuggestions
-    zsh-users/zsh-syntax-highlighting
     agkozak/zsh-z
 
     vscode
@@ -75,33 +81,27 @@ antigen bundles <<EOBUNDLES
     docker
     docker-compose
     docker-machine
-    kubectl
     kubetail
-    minikube
+ 
     alexrochas/zsh-extract
     alexrochas/zsh-zkubectl
     alexrochas/zsh-git-changes
 
+    
 EOBUNDLES
 
 
-# Load the theme.
-antigen theme bhilburn/powerlevel9k powerlevel9k
 
 # Tell Antigen that you're done.
 antigen apply
 
+source "$DOTFILES/zsh/completion.zsh"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Promptint
+source /usr/local/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+eval "$(starship init zsh)"
 
-
-##############################
-#### DISABLED ######
-##############################
-
-# https://github.com/alexrochas/zsh-vim-crtl-z
-# zle -N fancy-ctrl-z
-# bindkey '^Z' fancy-ctrl-z
-# antigen bundle alexrochas/zsh-vim-crtl-z
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/dev/.sdkman"
+[[ -s "/Users/dev/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/dev/.sdkman/bin/sdkman-init.sh"

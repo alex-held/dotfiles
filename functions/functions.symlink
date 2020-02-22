@@ -1,4 +1,5 @@
-#---- Functions ----
+
+
 function toggleClock () {
     ~/Git/dotfiles/bin/toggleClock.sh
 }

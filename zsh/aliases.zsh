@@ -1,9 +1,10 @@
-## 
+##
 # Aliases
 # ----------------------------
 
-alias ll=ls -la
-alias la=ls -a
+alias ls='exa -b --links --long -a --git'
+alias l='exa -@ --git  -H -g -a --group-directories-first --long --modified'
+
 
 # Config
 alias reload!='source ~/.zshrc'
@@ -32,5 +33,15 @@ alias ge='git-edit-new'
 alias gcm='git checkout master'
 alias gcmb='git checkout master && git checkout -b $1'
 
+alias diff='diff --color=auto'
+alias grep='grep --color=auto --exclude-dir={.bzr,VCS,.git,.hg,.svn}'
+alias tree='tree -aC -I .git --dirsfirst'
+
 # Remove `+` and `-` from start of diff lines; just rely upon color.
 alias gd='git diff --color | sed "s/^\([^-+ ]*\)[-+ ]/\\1/" | less -r'
+
+
+
+###
+alias zshconfig="code ~/.zshrc"
+alias config='/usr/bin/git --git-dir=/Users/$(whoami)/.cfg/ --work-tree=/Users/$(whoami)'
