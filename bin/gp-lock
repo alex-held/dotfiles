@@ -4,9 +4,6 @@ if [ -e "$1" ]
 then
     echo "Encrypting file '$1' -> '$1.asc'"
     gpg --encrypt --sign --armor -r gpg@alexheld.io $1
-    git rm --cached $1 || true
-    git rm $1 || true
-    git rm $1 || true
 else
     echo "No secret file '$1' to encrypt."
 fi

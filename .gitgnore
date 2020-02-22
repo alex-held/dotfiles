@@ -16,3 +16,5 @@ bin/bandwidth.log
 git/gitconfig.local.symlink
 
 .DS_Store
+
+**/*.secret
