@@ -1,12 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
-if [ -e $1 ]
+if [ -e "$1" ]
 then
     echo "Encrypting file '$1' -> '$1.asc'"
     gpg --encrypt --sign --armor -r gpg@alexheld.io $1
     rm $1
 else
-    echo "No secret file '$1' to encrypt." 
+    echo "No secret file '$1' to encrypt."
 fi
 
 
