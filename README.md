@@ -10,3 +10,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/alex-held/dotfiles/maste
 ```
 
 # Secret Encryption
+
+gp-lock
+
+gp-unlock
