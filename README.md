@@ -11,6 +11,8 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/alex-held/dotfiles/maste
 
 # Secret Encryption
 
+Githooks make sure that your *.secret files are encrypted
+ 
 Encrypts a secret file using my gpg userid.
 gp-lock <secret-file>
 
