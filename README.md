@@ -9,3 +9,4 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/alex-held/dotfiles/maste
 
 ```
 
+# Secret Encryption
