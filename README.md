@@ -11,7 +11,8 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/alex-held/dotfiles/maste
 
 # Secret Encryption
 
-Encrypt 
+Encrypts a secret file using my gpg userid.
 gp-lock <secret-file>
 
+Decrypts a secret file using my gpg userid.
 gp-unlock <encrypted-secret-file> <decrypted-file>
